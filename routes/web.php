@@ -17,10 +17,14 @@ Route::get('/', function () {
 
 Route::get('/coba', function () {
     return view('index');
-});
+})->name('web');
 
 Route::get('/admin', function () {
     return view('admin.index');
+});
+
+Route::get('/admin/editor', function () {
+    return view('admin.editors');
 });
 
 
