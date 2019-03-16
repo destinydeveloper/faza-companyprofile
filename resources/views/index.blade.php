@@ -38,8 +38,8 @@
 
 <body>
 
-    <!--==========================
-    Header
+<!--==========================
+            Header
   ============================-->
     <header id="header">
         <div class="container">
@@ -52,18 +52,18 @@
 
             <nav id="nav-menu-container">
                 <ul class="nav-menu">
-                    <li class="menu-active"><a href="#intro">Home</a></li>
-                    <li><a href="#about">Tentang Kami</a></li>
-                    <li><a href="#pricing">Visi & Misi</a></li>
-                    <li><a href="#features">Produk</a></li>
-                    <li><a href="#call-to-action">Pengumuman</a></li>
-                    <li class="menu-has-children"><a href="">Galeri</a>
+                    <li class="menu-active"><a href="#intro" title="Home">Home</a></li>
+                    <li><a href="#about" title="Tentang Kami">Tentang Kami</a></li>
+                    <li><a href="#pricing" title="Visi & Misi">Visi & Misi</a></li>
+                    <li><a href="#features" title="Produk">Produk</a></li>
+                    <li><a href="#call-to-action" title="Pengumuman">Pengumuman</a></li>
+                    <li class="menu-has-children"><a href="" title="Galeri">Galeri</a>
                         <ul>
-                            <li><a href="#gallery">Foto</a></li>
-                            <li><a href="#gallery2">Video</a></li>
+                            <li><a href="#gallery" title="Foto">Foto</a></li>
+                            <li><a href="#gallery2" title="Video">Video</a></li>
                         </ul>
                     </li>
-                    <li><a href="#contact">Kontak kami</a></li>
+                    <li><a href="#contact" title="Kontak Kami">Kontak kami</a></li>
                 </ul>
             </nav><!-- #nav-menu-container -->
         </div>
@@ -142,7 +142,7 @@
         <section id="pricing" class="bg-white">
                 <div class="container ">
                     <div class="section-header">
-                        <h3 class="section-title">Visi dan Misi</h3>
+                        <h3 class="section-title">Visi & Misi</h3>
                         <span class="section-divider"></span>
                         <p class="section-description">Sed ut perspiciatis unde omnis iste natus error sit voluptatem
                             accusantium doloremque</p>
@@ -479,14 +479,14 @@
     </main>
 
     <!--==========================
-    Footer
-  ============================-->
+        Footer
+    ============================-->
     <footer id="footer">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 text-lg-left text-center">
                     <div class="copyright">
-                        &copy; Copyright <strong>Avilon</strong>. All Rights Reserved
+                        &copy; Copyright <strong>Kampoeng Malang {{date('Y')}}</strong>. All Rights Reserved
                     </div>
                     <div class="credits">
                         <!--
