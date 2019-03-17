@@ -19,9 +19,12 @@ Route::get('/coba', function () {
     return view('index');
 })->name('web');
 
-Route::get('/admin', function () {
-    return view('admin.index');
+Route::group(['prefix' => 'admin'], function () {
+    Route::get('/', 'DashboardController@index')->name('dashboard.index');
+
+    Route::resource('/users', 'UsersController');
 });
+
 
 Route::get('/admin/editor', function () {
     return view('admin.editors');
@@ -29,3 +32,7 @@ Route::get('/admin/editor', function () {
 
 
 // Route::get('users/{id}', });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

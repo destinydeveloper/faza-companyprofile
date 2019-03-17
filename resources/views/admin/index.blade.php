@@ -2,16 +2,14 @@
 
 @section('page-title', 'Dashboard')
 
-@section('admin-name', 'Melkan')
-
 @section('admin-role', 'Administrasi')
 
-@section('content-title', 'Dashboard')
+@section('content-title', 'Pengguna')
 
 @section('breadcrumb')
     <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-home"></i> Home</a></li>
-        <li class="active">Dashboard</li>
+        <li><a href="#"><i class="fa fa-home"></i> Dashboard</a></li>
+        <li class="active">Home</li>
     </ol>
 @endsection
 

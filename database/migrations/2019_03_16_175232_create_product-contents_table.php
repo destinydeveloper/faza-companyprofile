@@ -13,7 +13,7 @@ class CreateProductContentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('product-content', function (Blueprint $table) {
+        Schema::create('product_content', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('id_product');
             $table->string('title', 30);
@@ -32,7 +32,7 @@ class CreateProductContentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('product-content');
+        Schema::dropIfExists('product_content');
 
         Schema::table('product-content', function(Blueprint $table) {
             $table->dropForeign('product-content_product_id_foreign');
