@@ -25,8 +25,8 @@
                         {{session('success')}}
                     </div>
                 @endif
-                    <div class="box-body table-responsive">
-                        <table class="table table-striped table-hover table-bordered table-align-middle text-center">
+                    <div  class="box-body table-responsive">
+                        <table  class="table table-striped table-hover table-bordered table-align-middle text-center">
                             <thead>
                                 <tr>
                                     <th>#</th>
@@ -41,16 +41,16 @@
                                 @php $i = 1 @endphp
                                 @foreach ($data['users'] as $user)
                                     <tr>
-                                        <td>{{ $i++ }}</td>
-                                        <td>{{ $user->name }}</td>
-                                        <td>{{ $user->username }}</td>
-                                        <td>{{ $user->email }}</td>
-                                        <td> <img src="{{ url('/') }}/uploads/users/{{$user->photo}}" alt="" srcset=""></td>
-                                        <td>
+                                        <td style="vertical-align: middle">{{ $i++ }}</td>
+                                        <td style="vertical-align: middle">{{ $user->name }}</td>
+                                        <td style="vertical-align: middle">{{ $user->username }}</td>
+                                        <td style="vertical-align: middle">{{ $user->email }}</td>
+                                        <td style="vertical-align: middle"> <img src="{{ url('/') }}/uploads/users/{{$user->photo}}" alt="" srcset=""></td>
+                                        <td style="vertical-align: middle">
                                             <form action="{{route('users.destroy', $user->id)}}" method="post">
                                                 @csrf
                                                 @method('delete')
-                                                <div class="btn-group">
+                                                <div class="btn-group-vertical">
                                                     <a href="{{ route('users.edit', $user->id) }}" class="btn btn-warning">Edit</a>
                                                     <input type="submit" value="Hapus" class="btn btn-danger" onclick="return confirm('Apakah anda yakin ingin menghapus data ini ?')" >
                                                 </div>

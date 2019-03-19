@@ -32,24 +32,16 @@
                     @endif
                     <div class="box-body">
                         <div class="form-group">
-                            <label for="nama">Nama</label>
-                        <input type="text" class="form-control" id="nama" name="name" placeholder="Masukan nama" value="{{ $data['users']->name }}" required>
-                        </div>
-                        <div class="form-group">
                             <label for="username">Username</label>
                             <input type="text" class="form-control" id="username" name="username" placeholder="Masukan username" value="{{ $data['users']->username }}" required disabled>
                         </div>
                         <div class="form-group">
+                            <label for="nama">Nama</label>
+                        <input type="text" class="form-control" id="nama" name="name" placeholder="Masukan nama" value="{{ $data['users']->name }}" required>
+                        </div>
+                        <div class="form-group">
                             <label for="email">Email</label>
                             <input type="email" class="form-control" id="email" name="email" placeholder="Masukan email" value="{{ $data['users']->email }}" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputPassword1">Password</label>
-                            <input type="password" class="form-control" id="exampleInputPassword1" name="password" placeholder="Password" value="{{ old('password') }}" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="password-confirm">Confirm Password</label>
-                            <input id="password-confirm" type="password" class="form-control" name="password_confirmation" placeholder="Konfirmasi password" required>
                         </div>
                         <div class="form-group">
                             <label for="exampleInputFile">Upload foto</label>

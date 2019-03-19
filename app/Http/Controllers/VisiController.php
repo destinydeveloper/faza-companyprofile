@@ -1,13 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use Illuminate\Http\Request;
-use App\User;
+use App\Models\Visi;
+use Illuminate\Support\Facades\Auth;
 use File;
 use Image;
 
-class UsersController extends Controller
+use Illuminate\Http\Request;
+
+class VisiController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +17,8 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $data['users'] = User::all();
-        return view('admin.users.index', compact('data'));
+        $data['visi'] = Visi::findOrFail(1);
+        return view('admin.visi.index', compact('data'));
     }
 
     /**
@@ -27,7 +28,7 @@ class UsersController extends Controller
      */
     public function create()
     {
-        return view('admin.users.create');
+        return view('admin.visi.create');
     }
 
     /**
@@ -40,28 +41,44 @@ class UsersController extends Controller
     {
         $request->validate([
             'photo' => 'required|file|image|mimes:jpeg,png,gif,webp|max:2048',
-            'password' => 'required | string | min:8 | confirmed',
+            'description' => 'required',
+            'title' => 'required| max:20',
         ]);
 
         try {
             $photo = null;
+
             if ($request->hasFile('photo')) {
-                $photo = $this->saveFile($request->name, $request->file('photo'));
+                $photo = $this->saveFile('visi', $request->file('photo'));
             }
-            $users = User::create([
-                'name' => $request->name,
-                'username' => $request->username,
-                'password' => bcrypt($request->password),
-                'email' => $request->email,
-                'photo' => $photo
+
+            $user = Auth::user();
+
+            Visi::create([
+                'description' => $request->description,
+                'title' => $request->title,
+                'path' => '/uploads/visi/',
+                'photo' => $photo,
+                'id_user' => $user->id,
             ]);
 
-            return redirect()->route('users.index')
-                ->with(['success' => '<strong> '.$users->name.' </strong> Ditambahkan']);
+            return redirect()->route('visi.index')
+                             ->with(['success' => 'Data berhasil ditambahkan']);
         } catch (\Exception $e) {
             return redirect()->back()
                 ->with(['error' => $e->getMessage()]);
         }
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
     }
 
     /**
@@ -72,8 +89,8 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-        $data['users'] = User::find($id);
-        return view('admin.users.edit', compact('data'));
+        $data['visi'] = Visi::findOrFail($id);
+        return view('admin.visi.edit', compact('data'));
     }
 
     /**
@@ -85,29 +102,32 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request, [
+        $request->validate([
             'photo' => 'nullable|file|image|mimes:jpeg,png,gif,webp|max:2048',
-            'password' => 'required | string | min:8 | confirmed',
+            'description' => 'required',
+            'title' => 'required',
         ]);
 
         try {
-            $user = User::findOrFail($id);
-            $photo = $user->photo;
+            $visi = Visi::findOrfail($id);
+            $user = Auth::user();
+
+            $photo = $visi->photo;
 
             if ($request->hasFile('photo')) {
-                !empty($photo) ? File::delete(public_path('uploads/users/' . $photo)) : null;
-                $photo = $this->saveFile($request->name, $request->file('photo'));
+                !empty($photo) ? File::delete(public_path('uploads/visi/' . $photo)) : null;
+                $photo = $this->saveFile('visi', $request->file('photo'));
             }
 
-            $user->update([
-                'name' => $request->name,
-                'password' => bcrypt($request->password),
-                'email' => $request->email,
-                'photo' => $photo
+            $visi->update([
+                'description' => $request->description,
+                'title' => $request->title,
+                'photo' => $photo,
+                'id_user' => $user->id,
             ]);
 
-            return redirect(route('users.index'))
-                ->with(['success' => '<b>'.$user->name.'</b> Diedit']);
+            return redirect()->route('visi.index')
+                             ->with(['success' => 'Data berhasil diubah']);
         } catch (\Exception $e) {
             return redirect()->back()
                 ->with(['error' => $e->getMessage()]);
@@ -122,24 +142,18 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-        $user = User::findOrFail($id);
-        if (!empty($user->photo)) {
-            File::delete(public_path('uploads/users/' . $user->photo));
-        }
-        $user->delete();
-
-        return redirect()->back()->with(['success' => $user->name. 'Telah Dihapus!']);
+        //
     }
 
     private function saveFile($name, $photo)
     {
         $images = str_slug($name) . time() . '.' . $photo->getClientOriginalExtension();
-        $path = public_path('uploads/users');
+        $path = public_path('uploads/visi');
 
         if (!File::isDirectory($path)) {
             File::makeDirectory($path, 0777, true, true);
         }
-        Image::make($photo)->resize(150, 150)->save($path . '/' . $images);
+        Image::make($photo)->save($path . '/' . $images);
         return $images;
     }
 }

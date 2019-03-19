@@ -58,19 +58,19 @@
                         <!-- User Account: style can be found in dropdown.less -->
                         <li class="dropdown user user-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <img src="{{ asset('assets/admin/dist/img/user2-160x160.jpg') }}" class="user-image"
+                                <img src="{{ url('/') }}/uploads/users/{{auth()->user()->photo }}" class="user-image"
                                      alt="User Image">
-                                <span class="hidden-xs">Nama user</span>
+                                <span class="hidden-xs">{{ auth()->user()->name }}</span>
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- User image -->
                                 <li class="user-header">
-                                    <img src="{{ asset('assets/admin/dist/img/user2-160x160.jpg') }}" class="img-circle"
+                                    <img src="{{ url('/') }}/uploads/users/{{auth()->user()->photo }}" class="img-circle"
                                          alt="User Image">
 
                                     <p>
-                                        Nama user - @yield('admin-role')
-                                        <small>Member since Nov. 2012</small>
+                                        {{ auth()->user()->name }} - @yield('admin-role')
+                                        <small>Member since {{ date('F Y', strtotime(auth()->user()->created_at)) }}</small>
                                     </p>
                                 </li>
                                 <li class="user-footer">
@@ -105,11 +105,10 @@
                 <!-- Sidebar user panel -->
                 <div class="user-panel">
                     <div class="pull-left image">
-                        <img src="{{ asset('assets/admin/dist/img/user2-160x160.jpg') }}" class="img-circle" alt="User Image">
+                        <img src="{{ url('/') }}/uploads/users/{{auth()->user()->photo }}" class="img-circle" alt="User Image">
                     </div>
                     <div class="pull-left info">
-                        <p>Nama user</p>
-                        {{-- auth()->user()->name --}}
+                        <p>{{ auth()->user()->name }}</p>
                         <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                     </div>
                 </div>

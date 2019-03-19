@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Avilon Bootstrap Template</title>
+    <title>{{ $data['home']->title }}</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -47,23 +47,23 @@
             <div id="logo" class="pull-left">
                 {{-- <h1><a href="#intro" class="scrollto">Kampoeng Malang</a></h1> --}}
                 <!-- Uncomment below if you prefer to use an image logo -->
-                <a href="#intro"><img src="{{ asset('assets/frontend/img/logo.png') }}" alt="header logo" title=""></a>
+                <a href="#intro"><img src="{{ url('/') }}{{ $data['home']->path }}{{ $data['home']->photo }}" alt="header logo" title=""></a>
             </div>
 
             <nav id="nav-menu-container">
                 <ul class="nav-menu">
-                    <li class="menu-active"><a href="#intro" title="Home">Home</a></li>
-                    <li><a href="#about" title="Tentang Kami">Tentang Kami</a></li>
-                    <li><a href="#pricing" title="Visi & Misi">Visi & Misi</a></li>
-                    <li><a href="#features" title="Produk">Produk</a></li>
-                    <li><a href="#call-to-action" title="Pengumuman">Pengumuman</a></li>
+                    <li class="menu-active"><a href="#intro" title="{{ $data['menu1']->title }}">{{ $data['menu1']->title }}</a></li>
+                    <li><a href="#about" title="{{ $data['menu2']->title }}">{{ $data['menu2']->title }}</a></li>
+                    <li><a href="#pricing" title="{{ $data['menu3']->title }}">{{ $data['menu3']->title }}</a></li>
+                    <li><a href="#features" title="{{ $data['menu4']->title }}">{{ $data['menu4']->title }}</a></li>
+                    <li><a href="#call-to-action" title="{{ $data['menu5']->title }}">{{ $data['menu5']->title }}</a></li>
                     <li class="menu-has-children"><a href="" title="Galeri">Galeri</a>
                         <ul>
                             <li><a href="#gallery" title="Foto">Foto</a></li>
                             <li><a href="#gallery2" title="Video">Video</a></li>
                         </ul>
                     </li>
-                    <li><a href="#contact" title="Kontak Kami">Kontak kami</a></li>
+                    <li><a href="#contact" title="{{ $data['menu6']->title }}">{{ $data['menu6']->title }}</a></li>
                 </ul>
             </nav><!-- #nav-menu-container -->
         </div>
@@ -75,8 +75,8 @@
     <section id="intro">
         <div class="product-screens mb-5">
             <div class="intro-text">
-                <h2>Welcome to Avilon</h2>
-                <p>We are team of talanted designers making websites with Bootstrap</p>
+                <h2>{{ $data['home']->title }}</h2>
+                <p>{{ $data['home']->description }}</p>
                 <a href="#about" class="btn-get-started scrollto">Get Started</a>
             </div>
         </div>
@@ -91,48 +91,25 @@
         <section id="about" class="section-bg">
             <div class="container-fluid">
                 <div class="section-header">
-                    <h3 class="section-title">Tentang Kami</h3>
+                    <h3 class="section-title">{{ $data['menu2']->title }}</h3>
                     <span class="section-divider"></span>
                     <p class="section-description">
-                        Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque<br>
-                        sunt in culpa qui officia deserunt mollit anim id est laborum
+                        {{ $data['menu2']->sub_title }}
                     </p>
                 </div>
 
                 <div class="row">
                     <div class="col-lg-6 about-img wow fadeInLeft">
-                        <img src="{{ asset('assets/frontend/img/about-img.jpg') }}" alt="">
+                        <img src="{{ url('/') }}{{ $data['aboutUs']->path }}{{ $data['aboutUs']->photo }}" alt="">
                     </div>
 
                     <div class="col-lg-6 content wow fadeInRight">
-                        <h2>Lorem ipsum dolor sit amet, consectetur adipiscing elite storium paralate</h2>
-                        <h3>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit
-                            anim id est laborum.</h3>
+                        <h2>{{ $data['aboutUs']->title }}</h2>
                         <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                            ut labore et dolore magna aliqua ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                        </p>
-
-                        <ul>
-                            <li><i class="ion-android-checkmark-circle"></i> Ullamco laboris nisi ut aliquip ex ea
-                                commodo consequat.</li>
-                            <li><i class="ion-android-checkmark-circle"></i> Duis aute irure dolor in reprehenderit in
-                                voluptate velit.</li>
-                            <li><i class="ion-android-checkmark-circle"></i> Ullamco laboris nisi ut aliquip ex ea
-                                commodo consequat. Duis aute irure dolor in reprehenderit in voluptate trideta
-                                storacalaperda mastiro dolore eu fugiat nulla pariatur.</li>
-                        </ul>
-
-                        <p>
-                            Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-                            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
-                            sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
-                            laborum Libero justo laoreet sit amet cursus sit amet dictum sit. Commodo sed egestas
-                            egestas fringilla phasellus faucibus scelerisque eleifend donec
+                            {{ $data['aboutUs']->description }}
                         </p>
                     </div>
                 </div>
-
             </div>
         </section><!-- #about -->
 
@@ -142,10 +119,11 @@
         <section id="pricing" class="bg-white">
                 <div class="container ">
                     <div class="section-header">
-                        <h3 class="section-title">Visi & Misi</h3>
+                        <h3 class="section-title">{{ $data['menu3']->title }}</h3>
                         <span class="section-divider"></span>
-                        <p class="section-description">Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-                            accusantium doloremque</p>
+                        <p class="section-description">
+                            {{ $data['menu3']->title }}
+                        </p>
                     </div>
 
                     <div class="row">
@@ -155,20 +133,13 @@
                                 <div class="container">
                                     <div class="row">
                                         <div class="col-12">
-                                            <img class="advanced-feature-img-right wow fadeInRight" src="{{ asset('assets/frontend/img/advanced-feature-1.jpg') }}"
+                                            <img class="advanced-feature-img-right wow fadeInRight" src="{{ url('/') }}{{ $data['visi']->path }}{{ $data['visi']->photo }}"
                                                  alt="">
                                             <div class="wow fadeInLeft">
-                                                <h2>Duis aute irure dolor in reprehenderit in voluptate velit esse</h2>
-                                                <h3>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-                                                    officia deserunt mollit anim id est laborum.</h3>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                                                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                                                    veniam.</p>
-                                                <p>Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                                    consequat. Duis aute irure dolor in reprehenderit in voluptate velit
-                                                    esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                                                    cupidatat non proident, sunt in culpa qui officia deserunt mollit anim
-                                                    id est laborum.</p>
+                                                <h2>{{ $data['visi']->title }}</h2>
+                                                <p>
+                                                    {{ $data['visi']->description }}
+                                                </p>
                                             </div>
                                         </div>
                                     </div>
@@ -179,22 +150,28 @@
                                 <div class="container">
                                     <div class="row">
                                         <div class="col-12">
-                                            <img class="advanced-feature-img-left wow fadeInRight" src="{{ asset('assets/frontend/img/advanced-feature-3.jpg') }}"
+                                            <img class="advanced-feature-img-left wow fadeInRight" src="{{ url('/') }}{{ $data['misi']->path }}{{ $data['misi']->photo }}"
                                                  alt="">
                                             <div class="wow fadeInRight">
-                                                <h2>Duis aute irure dolor in reprehenderit in voluptate velit esse</h2>
-                                                <h3>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-                                                    officia deserunt mollit anim id est laborum.</h3>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                                                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                                                    veniam</p>
-                                                <i class="ion-ios-albums-outline"></i>
-                                                <p>Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                                    consequat. Duis aute irure dolor in reprehenderit in voluptate velit
-                                                    esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                                                    cupidatat non proident, sunt in culpa qui officia deserunt mollit anim
-                                                    id est laborum.</p>
-                                            </div>
+                                                 <h2>{{ $data['misi']->title }}</h2>
+                                                    <ul>
+                                                        @foreach ($data['misi_content'] as $content)
+                                                        <table>
+                                                            <tr>
+                                                                <td style="vertical-align: top;">
+                                                                    <i class="ion-android-checkmark-circle"></i>
+                                                                </td>
+                                                                <td>
+                                                                    <div>
+                                                                        {{ $content->description }}
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                        &nbsp;
+                                                        @endforeach
+                                                    </ul>
+                                                </div>
                                         </div>
                                     </div>
                                 </div>
@@ -215,8 +192,11 @@
 
                     <div class="col-lg-8 offset-lg-4">
                         <div class="section-header wow fadeIn" data-wow-duration="1s">
-                            <h3 class="section-title">Produk</h3>
+                            <h3 class="section-title">{{ $data['menu4']->title }}</h3>
                             <span class="section-divider"></span>
+                            <p class="section-description">
+                                {{ $data['menu4']->sub_title }}
+                            </p>
                         </div>
                     </div>
 
@@ -269,13 +249,14 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-9 text-center text-lg-left">
-                        <h3 class="cta-title">PESAN, KESAN, ATAU PENGUMUMAN</h3>
-                        <p class="cta-text"> Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
-                            dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                            culpa qui officia deserunt mollit anim id est laborum.</p>
+                        <h3 class="cta-title">{{ $data['menu5']->title }}</h3>
+                        <p class="cta-text">
+                            {{ $data['menu5']->sub_title }}
+                        </p>
                     </div>
                     <div class="col-lg-3 cta-btn-container text-center">
-                        <a class="cta-btn align-middle" href="#">Call To Action</a>
+                        <a class="cta-btn align-middle" href="#contact">Call To Action</a>
+
                     </div>
                 </div>
 
@@ -290,8 +271,9 @@
                 <div class="section-header">
                     <h3 class="section-title">Foto</h3>
                     <span class="section-divider"></span>
-                    <p class="section-description">Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-                        accusantium doloremque</p>
+                    <p class="section-description">
+
+                    </p>
                 </div>
 
                 <div class="row no-gutters">
@@ -365,8 +347,9 @@
                 <div class="section-header">
                     <h3 class="section-title">Video</h3>
                     <span class="section-divider"></span>
-                    <p class="section-description">Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-                        accusantium doloremque</p>
+                    <p class="section-description">
+
+                    </p>
                 </div>
 
                 <div class="row no-gutters">
@@ -401,7 +384,7 @@
         <section id="contact">
             <div class="container">
                 <div class="section-header mb-5">
-                    <h3 class="section-title">Hubungi Kami</h3>
+                    <h3 class="section-title">{{ $data['menu6']->title }}</h3>
                     <span class="section-divider"></span>
                 </div>
                 <div class="row wow fadeInUp">

@@ -4,7 +4,7 @@
 
 @section('admin-role', 'Administrasi')
 
-@section('content-title', 'Pengguna')
+@section('content-title', 'Dashboard')
 
 @section('breadcrumb')
     <ol class="breadcrumb">
