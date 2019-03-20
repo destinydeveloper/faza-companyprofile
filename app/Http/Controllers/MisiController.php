@@ -205,7 +205,7 @@ class MisiController extends Controller
     public function destroyContent($id)
     {
         try{
-            $misi_content = Misi_content::findOrfail($id)->delete();
+            Misi_content::findOrfail($id)->delete();
             return redirect()->route('misi.index')
                              ->with(['success' => 'Konten berhasil dihapus']);
         } catch(\Exception $e) {
@@ -221,7 +221,7 @@ class MisiController extends Controller
         if (!File::isDirectory($path)) {
             File::makeDirectory($path, 0777, true, true);
         }
-        Image::make($photo)->save($path . '/' . $images);
+        Image::make($photo)->resize(555, 371)->save($path . '/' . $images);
         return $images;
     }
 }

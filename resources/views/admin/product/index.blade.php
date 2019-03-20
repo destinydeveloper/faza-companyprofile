@@ -1,14 +1,14 @@
 @extends('admin.layouts.app')
 
-@section('page-title', 'Misi')
+@section('page-title', 'Produk')
 
 @section('admin-role', 'Administrasi')
 
-@section('content-title', 'Misi')
+@section('content-title', 'Produk')
 
 @section('breadcrumb')
     <ol class="breadcrumb">
-        <li><a href="{{ route('misi.index') }}"><i class="fa fa-clone"></i> Misi</a></li>
+        <li><a href="{{ route('misi.index') }}"><i class="fa fa-product-hunt"></i> Produk</a></li>
         <li class="active">Home</li>
     </ol>
 @endsection
@@ -26,21 +26,16 @@
         {{session('success')}}
     </div>
     @endif
-    <div class="col-md-6 col-xs-12">
+    <div class="col-md-4 col-xs-12">
         <div class="box box-primary">
             <div class="box-header">
-                <h3 class="box-title">Misi </h3>
-                <a href="{{ route('misi.edit', $data['misi']->id) }}" style="float: right" class="btn btn-warning btn-sm"><span class="fa fa-chain"></span> Ubah</a>
+                <h3 class="box-title">Produk </h3>
+                <a href="{{ route('product.edit', $data['product']->id) }}" style="float: right" class="btn btn-warning btn-sm"><span class="fa fa-chain"></span> Ubah</a>
             </div>
             <div class="box-body ">
                 <div class="form-group">
-                    <label>Judul</label>
-                    <input type="text" id="judul" name="title" class="title form-control" style="background: white; font-size: 15px"
-                        readonly value="{{ $data['misi']->title }}">
-                </div>
-                <div class="form-group">
                     <label>Foto</label>
-                    <img class="img-responsive" id="logo" src="{{ url('/') }}{{$data['misi']->path}}{{$data['misi']->photo }}" width="50%" height="50%" alt="" srcset="">
+                    <img class="img-responsive" id="logo" src="{{ url('/') }}{{$data['product']->path}}{{$data['product']->photo }}" width="50%" height="50%" alt="" srcset="">
                 </div>
             </div>
             {{-- {{ url('/') }}{{$data['visi']->path}}{{$data['visi']->background_photo}} --}}
@@ -51,30 +46,39 @@
             </form>
         </div>
     </div>
-    <div class="col-md-6 col-xs-12">
+    <div class="col-md-8 col-xs-12">
         <div class="box box-primary">
             <div class="box-header">
-                <h3 class="box-title">Isi konten misi</h3>
-                <a href="{{ route('misi.create_content') }}" style="float: right" class="btn btn-success btn-sm"><span class="fa fa-plus"></span> Tambah data</a>
+                <h3 class="box-title">Isi konten produk</h3>
+                <a href="{{ route('product.create_content') }}" style="float: right" class="btn btn-success btn-sm"><span class="fa fa-plus"></span> Tambah data</a>
             </div>
             <div class="box-body no-padding">
                 <table class="table table-striped">
                     <tr>
                         <th style="width: 10px; text-align: center">#</th>
-                        <th style="text-align: center">Task</th>
+                        <th style="text-align: center">Judul</th>
+                        <th style="text-align: center">Link</th>
+                        <th style="text-align: center">Deskripsi</th>
                         <th style="text-align: center">Aksi</th>
                     </tr>
-                    @php $i = 1 @endphp
-                    @foreach ($data['misi_content'] as $data)
+                    @php $i = 1 ; $link  @endphp
+                    @foreach ($data['product_content'] as $data)
+
+                    @php
+                        $data->link !== '#' ?  $link = $data->link : $link = ''
+                    @endphp
+
                         <tr>
                             <td style="text-align: center; vertical-align: middle">{{ $i++ }}. </td>
+                            <td style=" vertical-align: middle; text-align: center">{{ $data->title }}</td>
+                            <td style=" vertical-align: middle; text-align: center"> <a href="http://{{ $link }}">{{ $link }}</a></td>
                             <td style=" vertical-align: middle">{{ $data->description }}</td>
                             <td style="text-align: center; vertical-align: middle">
-                                <form action="{{ route('misi.destroy_content', $data->id) }}" method="post">
+                                <form action="{{ route('product.destroy_content', $data->id) }}" method="post">
                                     @csrf
                                     @method('delete')
                                     <div class="btn-group-vertical">
-                                        <a href="{{ route('misi.edit_content', $data->id) }}" class="btn btn-warning btn-sm"><span class="fa fa-chain"></span> Edit</a>
+                                        <a href="{{ route('product.edit_content', $data->id) }}" class="btn btn-warning btn-sm"><span class="fa fa-chain"></span> Edit</a>
                                         <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Apakah anda yakin ingin menghapus data ini ?')">
                                                 <span class="fa fa-trash"></span> Hapus
                                         </button>

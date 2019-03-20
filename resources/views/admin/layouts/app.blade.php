@@ -78,7 +78,10 @@
                                         <a href="#" class="btn btn-default btn-flat">Ubah Password</a>
                                     </div>
                                     <div class="pull-right">
-                                        <a href="#" class="btn btn-default btn-flat">Logout</a>
+                                        <form action="{{ route('logout') }}" method="post">
+                                            @csrf
+                                            <input type="submit" class="btn btn-default btn-flat" value="Logout">
+                                        </form>
                                     </div>
                                 </li>
                                 <!-- Menu Footer-->

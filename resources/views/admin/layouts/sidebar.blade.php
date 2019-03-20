@@ -50,8 +50,8 @@
                 </ul>
             </li>
             <li class="{{Request::is('admin/product*') ? 'active' : '' }}">
-                <a href="{{ route('aboutus.index') }}">
-                    <i class="fa fa-product-hunt"></i> <span> Product</span>
+                <a href="{{ route('product.index') }}">
+                    <i class="fa fa-product-hunt"></i> <span> Produk</span>
                 </a>
             </li>
             <li class="{{Request::is('admin/notice*') ? 'active' : '' }}">

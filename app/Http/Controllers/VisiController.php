@@ -153,7 +153,7 @@ class VisiController extends Controller
         if (!File::isDirectory($path)) {
             File::makeDirectory($path, 0777, true, true);
         }
-        Image::make($photo)->save($path . '/' . $images);
+        Image::make($photo)->resize(555, 371)->save($path . '/' . $images);
         return $images;
     }
 }

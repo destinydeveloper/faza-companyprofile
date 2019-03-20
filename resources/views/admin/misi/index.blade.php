@@ -61,7 +61,7 @@
                 <table class="table table-striped">
                     <tr>
                         <th style="width: 10px; text-align: center">#</th>
-                        <th style="text-align: center">Task</th>
+                        <th style="text-align: center">Visi</th>
                         <th style="text-align: center">Aksi</th>
                     </tr>
                     @php $i = 1 @endphp
