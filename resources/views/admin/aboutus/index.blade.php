@@ -8,7 +8,7 @@
 
 @section('breadcrumb')
     <ol class="breadcrumb">
-        <li><a href="{{ route('aboutus.index') }}"><i class="fa fa-home"></i> Tentang Kami</a></li>
+        <li><a href="{{ route('aboutus.index') }}"><i class="fa fa-history"></i> Tentang Kami</a></li>
         <li class="active">Home</li>
     </ol>
 @endsection
@@ -23,24 +23,23 @@
     <div class="col-md-7 col-xs-12">
         <div class="box">
             <div class="box box-primary">
+                    <div class="box-header">
+                        <h3 class="box-title">Tentang kami </h3>
+                        <a href="{{ route('aboutus.edit', $data['aboutUs']->id) }}" style="float: right" class="btn btn-warning btn-sm"><span class="fa fa-chain"></span> Ubah</a>
+                    </div>
                     <div class="box-body">
                         <div class="form-group">
-                            <h3>Judul</h3>
+                            <label>Judul</label>
                             <input type="text" id="judul" name="title" class="title form-control" style="background: white; font-size: 15px" value="{{ $data['aboutUs']->title }}" readonly>
                         </div>
                         <div class="form-group">
-                            <h3>Deskripsi</h3>
+                            <label>Deskripsi</label>
                             <textarea name="description" class="form-control" id="deskripsi" style="background: white; font-size: 15px" cols="30" rows="5" readonly>{{ $data['aboutUs']->description }}</textarea>
                         </div>
                         <div class="form-group">
-                            <h3>Foto</h3>
+                            <label>Foto</label>
                             <img class="img-responsive" id="logo" src="{{ url('/') }}{{$data['aboutUs']->path}}{{$data['aboutUs']->photo}} " width="50%" height="50%" alt="" srcset="">
                         </div>
-                    </div>
-                    {{-- {{ url('/') }}{{$data['home']->path}}{{$data['home']->background_photo}} --}}
-                    <div class="box-footer text-center">
-                        <a href="{{ route('aboutus.edit', $data['aboutUs']->id) }}" class="btn btn-warning btn-block">Ubah</a>
-                        {{-- {{ route('home.edit', $data['home']->id) }} --}}
                     </div>
                 </form>
             </div>

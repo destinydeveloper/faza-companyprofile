@@ -42,6 +42,12 @@
                             {{ session('login.failed') }}
                     </div>
                 @endif
+                @if (session()->has('nologin'))
+                    <div class="alert alert-warning alert-dismissible">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                            {{ session('nologin') }}
+                    </div>
+                @endif
             <form action="{{ route('login') }}" method="post">
                 @csrf
                 <div class="form-group has-feedback">

@@ -18,7 +18,7 @@
         <div class="col-xs-12">
             <div class="box">
                 <div class="box-header">
-                    <a href="{{ route('users.create') }}" class="btn btn-success"><span class="fa fa-plus"></span> Tambah data</a>
+                    <a href="{{ route('users.create') }}" class="btn btn-success btn-sm"><span class="fa fa-plus"></span> Tambah data</a>
                 </div>
                 @if (session('success'))
                     <div class="alert alert-success alert-dismissible">
@@ -50,9 +50,11 @@
                                             <form action="{{route('users.destroy', $user->id)}}" method="post">
                                                 @csrf
                                                 @method('delete')
-                                                <div class="btn-group-vertical">
-                                                    <a href="{{ route('users.edit', $user->id) }}" class="btn btn-warning">Edit</a>
-                                                    <input type="submit" value="Hapus" class="btn btn-danger" onclick="return confirm('Apakah anda yakin ingin menghapus data ini ?')" >
+                                                <div class="btn-group-vertical btn-group-sm">
+                                                    <a href="{{ route('users.edit', $user->id) }}" class="btn btn-warning"><span class="fa fa-chain"></span> Edit</a>
+                                                    <button type="submit" class="btn btn-danger" onclick="return confirm('Apakah anda yakin ingin menghapus data ini ?')">
+                                                        <span class="fa fa-trash"> Hapus</span>
+                                                    </button>
                                                 </div>
                                             </form>
                                         </td>

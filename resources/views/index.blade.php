@@ -155,7 +155,7 @@
                                             <div class="wow fadeInRight">
                                                  <h2>{{ $data['misi']->title }}</h2>
                                                     <ul>
-                                                        @foreach ($data['misi_content'] as $content)
+                                                        @foreach ($data['misi_content'] as $misiContent)
                                                         <table>
                                                             <tr>
                                                                 <td style="vertical-align: top;">
@@ -163,7 +163,7 @@
                                                                 </td>
                                                                 <td>
                                                                     <div>
-                                                                        {{ $content->description }}
+                                                                        {{ $misiContent->description }}
                                                                     </div>
                                                                 </td>
                                                             </tr>
@@ -201,40 +201,29 @@
                     </div>
 
                     <div class="col-lg-4 col-md-5 features-img">
-                        <img src="{{ asset('assets/frontend/img/product-features.png') }}" alt="" class="wow fadeInLeft">
+                        <img src="{{ url('/') }}{{ $data['product']->path }}{{ $data['product']->photo }}" alt="" class="wow fadeInLeft">
                     </div>
 
                     <div class="col-lg-8 col-md-7 ">
 
                         <div class="row">
-                            <div class="col-lg-6 col-md-6 box wow fadeInRight">
-                                <a href="{{route('web')}}">
-                                    <div class="icon"><i class="ion-social-buffer-outline"></i></div>
-                                    <h4 class="title">Faza fruit & Vegetables</h4>
-                                    <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas
-                                        molestias excepturi sint occaecati cupiditate non provident clarida perendo.</p>
-                                </a>
-                            </div>
-                            <div class="col-lg-6 col-md-6 box wow fadeInRight">
-                                    <a href="{{route('web')}}">
+                            @foreach ($data['product_content'] as $productContent)
+                                @php
+                                    $link;
+                                    $productContent->link !== '#' ?  $link = 'http://'. "" .$productContent->link : $link = '#features'
+                                @endphp
+
+                                <div class="col-lg-6 col-md-6 box wow fadeInRight">
+                                    <a href="{{ $link }}">
                                         <div class="icon"><i class="ion-social-buffer-outline"></i></div>
-                                        <h4 class="title">Faza fruit & Vegetables</h4>
-                                        <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas
-                                            molestias excepturi sint occaecati cupiditate non provident clarida perendo.</p>
+                                        <h4 class="title">{{ $productContent->title }}</h4>
+                                        <p class="description">
+                                            {{ $productContent->description }}
+                                        </p>
                                     </a>
                                 </div>
-                            <div class="col-lg-6 col-md-6 box wow fadeInRight" data-wow-delay="0.2s">
-                                <div class="icon"><i class="ion-social-buffer-outline"></i></div>
-                                <h4 class="title"><a href="">Sed ut perspiciatis</a></h4>
-                                <p class="description">Duis aute irure dolor in reprehenderit in voluptate velit esse
-                                    cillum dolore eu fugiat nulla pariatur teleca starter sinode park ledo.</p>
-                            </div>
-                            <div class="col-lg-6 col-md-6 box wow fadeInRight" data-wow-delay="0.3s">
-                                <div class="icon"><i class="ion-social-buffer-outline"></i></div>
-                                <h4 class="title"><a href="">Magni Dolores</a></h4>
-                                <p class="description">Excepteur sint occaecat cupidatat non proident, sunt in culpa
-                                    qui officia deserunt mollit anim id est laborum dinoun trade capsule.</p>
-                            </div>
+                            @endforeach
+
                         </div>
                     </div>
                 </div>
@@ -251,7 +240,7 @@
                     <div class="col-lg-9 text-center text-lg-left">
                         <h3 class="cta-title">{{ $data['menu5']->title }}</h3>
                         <p class="cta-text">
-                            {{ $data['menu5']->sub_title }}
+                            {{ $data['notice']->description }}
                         </p>
                     </div>
                     <div class="col-lg-3 cta-btn-container text-center">

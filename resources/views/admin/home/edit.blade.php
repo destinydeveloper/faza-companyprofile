@@ -4,7 +4,7 @@
 
 @section('admin-role', 'Administrasi')
 
-@section('content-title', 'Home')
+@section('content-title', 'Edit home')
 
 @section('breadcrumb')
     <ol class="breadcrumb">
@@ -18,6 +18,10 @@
     <div class="col-md-7 col-xs-12">
         <div class="box">
             <div class="box box-primary">
+                    <div class="box-header">
+                        <h3 class="box-title">Home </h3>
+                        {{-- <a href="{{ route('home.edit', $data['home']->id) }}" style="float: right" class="btn btn-warning btn-sm"><span class="fa fa-chain"></span> Ubah</a> --}}
+                    </div>
                     <div class="box-body">
                         <form action="{{ route('home.update', $data['home']->id) }}" method="post" enctype="multipart/form-data">
                             @csrf

@@ -55,7 +55,7 @@
                 </a>
             </li>
             <li class="{{Request::is('admin/notice*') ? 'active' : '' }}">
-                <a href="{{ route('aboutus.index') }}">
+                <a href="{{ route('notice.index') }}">
                     <i class="fa fa-list-alt"></i> <span> Pengumuman</span>
                 </a>
             </li>

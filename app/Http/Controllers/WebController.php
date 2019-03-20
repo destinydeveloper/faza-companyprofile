@@ -9,6 +9,9 @@ use App\Models\About_us;
 use App\Models\Visi;
 use App\Models\Misi;
 use App\Models\Misi_content;
+use App\Models\Product;
+use App\Models\Product_content;
+use App\Models\Notice;
 
 
 class WebController extends Controller
@@ -48,6 +51,18 @@ class WebController extends Controller
         // Content misi
         $data['misi_content'] = Misi_content::all();
         // Content misi
+
+        // Produk
+        $data['product'] = Product::find(1);
+        // Produk
+
+        // Content produk
+        $data['product_content'] = Product_content::all();
+        // Content produk
+
+        // Notice
+        $data['notice'] = Notice::find(1);
+        // Notice
 
         return view('index', compact('data'));
     }

@@ -11,10 +11,6 @@
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
 Route::get('/', 'WebController@index')->name('web');
 
 Route::get('admin/login', 'Auth\LoginController@showLoginForm')->name('login');
@@ -49,12 +45,15 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function () {
     Route::delete('/product/{content}', 'ProductController@destroyContent')->name('product.destroy_content');
 
     Route::resource('/product', 'ProductController', ['except' => ['show', 'destroy', 'create', 'store']]);
+
+    Route::resource('/notice', 'NoticeController');
+
 });
 
 
 // Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('/home', 'HomeController@index')->name('home');
 
 
 

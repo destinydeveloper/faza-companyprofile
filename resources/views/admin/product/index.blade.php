@@ -65,13 +65,13 @@
                     @foreach ($data['product_content'] as $data)
 
                     @php
-                        $data->link !== '#' ?  $link = $data->link : $link = ''
+                        $data->link !== '#' ?  $link = 'http://'. "" .$data->link : $link = '#'
                     @endphp
 
                         <tr>
                             <td style="text-align: center; vertical-align: middle">{{ $i++ }}. </td>
                             <td style=" vertical-align: middle; text-align: center">{{ $data->title }}</td>
-                            <td style=" vertical-align: middle; text-align: center"> <a href="http://{{ $link }}">{{ $link }}</a></td>
+                            <td style=" vertical-align: middle; text-align: center"> <a href="{{ $link }}">{{ $link }}</a></td>
                             <td style=" vertical-align: middle">{{ $data->description }}</td>
                             <td style="text-align: center; vertical-align: middle">
                                 <form action="{{ route('product.destroy_content', $data->id) }}" method="post">

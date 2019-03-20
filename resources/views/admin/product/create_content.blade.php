@@ -74,10 +74,15 @@
                         </tr>
                         @php $i = 1 @endphp
                         @foreach ($data['product_content'] as $data)
+
+                        @php
+                            $link;
+                            $data->link !== '#' ?  $link = 'http://'. "" .$data->link : $link = '#'
+                        @endphp
                             <tr >
                                 <td style="text-align: center">{{ $i++ }}.</td>
                                 <td>{{ $data['title'] }}</td>
-                                <td><a href="http://{{ $data['link'] }}">{{ $data['link'] }}</a></td>
+                                <td><a href="{{ $link }}">{{ $link }}</a></td>
                                 <td>{{ $data['description'] }}</td>
                                 <td>
                                     <span class="label label-info">{{ date('d F Y', strtotime($data->updated_at)) }}</span>

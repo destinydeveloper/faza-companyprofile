@@ -47,7 +47,7 @@
                                             <span class="label label-danger">{{ $data->user->name }}</span>
                                         </td>
                                         <td>
-                                            <a href="{{ route('menu.edit', $data->id) }}" class="btn btn-warning">Edit</a>
+                                            <a href="{{ route('menu.edit', $data->id) }}" class="btn btn-warning btn-sm"><span class="fa fa-chain"></span> Edit</a>
                                             {{-- <form action="{{route('menu.destroy', $data->id)}}" method="post">
                                                 @csrf
                                                 @method('delete')

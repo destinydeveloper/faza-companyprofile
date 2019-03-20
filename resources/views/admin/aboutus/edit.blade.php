@@ -1,15 +1,15 @@
 @extends('admin.layouts.app')
 
-@section('page-title', 'Home')
+@section('page-title', 'Tentang kami')
 
 @section('admin-role', 'Administrasi')
 
-@section('content-title', 'Home')
+@section('content-title', 'Edit tentang kami')
 
 @section('breadcrumb')
     <ol class="breadcrumb">
-        <li><a href="{{ route('home.index') }}"><i class="fa fa-home"></i> Home</a></li>
-        <li class="active">Tambah data Home</li>
+        <li><a href="{{ route('aboutus.index') }}"><i class="fa fa-history"></i> Tentang kami</a></li>
+        <li class="active">Edit data Tentang kami</li>
     </ol>
 @endsection
 
@@ -18,6 +18,9 @@
     <div class="col-md-7 col-xs-12">
         <div class="box">
             <div class="box box-primary">
+                    <div class="box-header">
+                        <h3 class="box-title">Tentang kami </h3>
+                    </div>
                     <div class="box-body">
                         <form action="{{ route('aboutus.update', $data['aboutUs']->id) }}" method="post" enctype="multipart/form-data">
                             @csrf
