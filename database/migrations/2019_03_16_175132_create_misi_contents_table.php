@@ -34,11 +34,11 @@ class CreateMisiContentsTable extends Migration
         Schema::dropIfExists('misi_content');
 
         Schema::table('misi_content', function(Blueprint $table) {
-            $table->dropForeign('misi_content_misi_id_foreign');
+            $table->dropForeign('misi_content_id_misi_foreign');
         });
 
         Schema::table('misi_content', function(Bluepsrint $table) {
-            $table->dropIndex('misi_content_misi_id_foreign');
+            $table->dropIndex('misi_content_id_misi_foreign');
         });
 
         Schema::table('misi_content', function(Blueprint $table) {

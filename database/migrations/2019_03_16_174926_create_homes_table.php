@@ -15,16 +15,12 @@ class CreateHomesTable extends Migration
     {
         Schema::create('home', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('id_user');
             $table->string('title', 30);
             $table->string('description', 100);
             $table->text('photo');
             $table->text('background_photo');
             $table->string('path', 100);
             $table->timestamps();
-
-            $table->foreign('id_user')->references('id')->on('users')
-                  ->onUpdate('cascade')->onDelete('cascade');
         });
     }
 
@@ -36,17 +32,5 @@ class CreateHomesTable extends Migration
     public function down()
     {
         Schema::dropIfExists('home');
-
-        Schema::table('home', function(Blueprint $table) {
-            $table->dropForeign('home_user_id_foreign');
-        });
-
-        Schema::table('home', function(Bluepsrint $table) {
-            $table->dropIndex('home_user_id_foreign');
-        });
-
-        Schema::table('home', function(Blueprint $table) {
-            $table->integer('id_user')->change();
-        });
     }
 }

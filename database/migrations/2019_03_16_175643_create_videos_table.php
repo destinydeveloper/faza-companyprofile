@@ -15,12 +15,8 @@ class CreateVideosTable extends Migration
     {
         Schema::create('video', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('id_user');
             $table->text('link_video');
             $table->timestamps();
-
-            $table->foreign('id_user')->references('id')->on('users')
-                  ->onUpdate('cascade')->onDelete('cascade');
         });
     }
 
@@ -32,17 +28,5 @@ class CreateVideosTable extends Migration
     public function down()
     {
         Schema::dropIfExists('video');
-
-        Schema::table('video', function(Blueprint $table) {
-            $table->dropForeign('video_user_id_foreign');
-        });
-
-        Schema::table('video', function(Bluepsrint $table) {
-            $table->dropIndex('video_user_id_foreign');
-        });
-
-        Schema::table('video', function(Blueprint $table) {
-            $table->integer('id_user')->change();
-        });
     }
 }

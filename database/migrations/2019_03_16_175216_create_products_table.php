@@ -15,13 +15,9 @@ class CreateProductsTable extends Migration
     {
         Schema::create('product', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('id_user');
             $table->text('photo');
             $table->string('path', 100);
             $table->timestamps();
-
-            $table->foreign('id_user')->references('id')->on('users')
-                  ->onUpdate('cascade')->onDelete('cascade');
         });
     }
 
@@ -33,18 +29,5 @@ class CreateProductsTable extends Migration
     public function down()
     {
         Schema::dropIfExists('product');
-
-
-        Schema::table('product', function(Blueprint $table) {
-            $table->dropForeign('product_user_id_foreign');
-        });
-
-        Schema::table('product', function(Bluepsrint $table) {
-            $table->dropIndex('product_user_id_foreign');
-        });
-
-        Schema::table('product', function(Blueprint $table) {
-            $table->integer('id_user')->change();
-        });
     }
 }

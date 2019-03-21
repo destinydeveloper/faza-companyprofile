@@ -15,15 +15,11 @@ class CreateVisisTable extends Migration
     {
         Schema::create('visi', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('id_user');
             $table->string('title', 5);
             $table->text('description');
             $table->text('photo');
             $table->string('path', 100);
             $table->timestamps();
-
-            $table->foreign('id_user')->references('id')->on('users')
-                  ->onUpdate('cascade')->onDelete('cascade');
         });
     }
 
@@ -35,17 +31,5 @@ class CreateVisisTable extends Migration
     public function down()
     {
         Schema::dropIfExists('visi');
-
-        Schema::table('visi', function(Blueprint $table) {
-            $table->dropForeign('visi_user_id_foreign');
-        });
-
-        Schema::table('visi', function(Bluepsrint $table) {
-            $table->dropIndex('visi_user_id_foreign');
-        });
-
-        Schema::table('visi', function(Blueprint $table) {
-            $table->integer('id_user')->change();
-        });
     }
 }

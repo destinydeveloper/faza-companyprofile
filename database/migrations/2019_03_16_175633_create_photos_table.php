@@ -33,17 +33,5 @@ class CreatePhotosTable extends Migration
     public function down()
     {
         Schema::dropIfExists('photo');
-
-        Schema::table('photo', function(Blueprint $table) {
-            $table->dropForeign('photo_user_id_foreign');
-        });
-
-        Schema::table('photo', function(Bluepsrint $table) {
-            $table->dropIndex('photo_user_id_foreign');
-        });
-
-        Schema::table('photo', function(Blueprint $table) {
-            $table->integer('id_user')->change();
-        });
     }
 }

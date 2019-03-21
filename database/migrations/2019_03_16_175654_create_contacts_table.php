@@ -13,9 +13,8 @@ class CreateContactsTable extends Migration
      */
     public function up()
     {
-        Schema::create('contact-us', function (Blueprint $table) {
+        Schema::create('contact_us', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('id_user');
             $table->string('address', 100);
             $table->string('email')->unique();
             $table->string('telp', 15);
@@ -25,8 +24,6 @@ class CreateContactsTable extends Migration
 
             $table->timestamps();
 
-            $table->foreign('id_user')->references('id')->on('users')
-                  ->onUpdate('cascade')->onDelete('cascade');
         });
     }
 
@@ -37,18 +34,6 @@ class CreateContactsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('contact-us');
-
-        Schema::table('contact-us', function(Blueprint $table) {
-            $table->dropForeign('contact-us_user_id_foreign');
-        });
-
-        Schema::table('contact-us', function(Bluepsrint $table) {
-            $table->dropIndex('contact-us_user_id_foreign');
-        });
-
-        Schema::table('contact-us', function(Blueprint $table) {
-            $table->integer('id_user')->change();
-        });
+        Schema::dropIfExists('contact_us');
     }
 }

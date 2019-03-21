@@ -15,14 +15,10 @@ class CreateMisisTable extends Migration
     {
         Schema::create('misi', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('id_user');
             $table->string('title', 5);
             $table->text('photo');
             $table->string('path', 100);
             $table->timestamps();
-
-            $table->foreign('id_user')->references('id')->on('users')
-                  ->onUpdate('cascade')->onDelete('cascade');
         });
     }
 
@@ -34,17 +30,5 @@ class CreateMisisTable extends Migration
     public function down()
     {
         Schema::dropIfExists('misi');
-
-        Schema::table('misi', function(Blueprint $table) {
-            $table->dropForeign('misi_user_id_foreign');
-        });
-
-        Schema::table('misi', function(Bluepsrint $table) {
-            $table->dropIndex('misi_user_id_foreign');
-        });
-
-        Schema::table('misi', function(Blueprint $table) {
-            $table->integer('id_user')->change();
-        });
     }
 }
