@@ -52,14 +52,11 @@ class VisiController extends Controller
                 $photo = $this->saveFile('visi', $request->file('photo'));
             }
 
-            $user = Auth::user();
-
             Visi::create([
                 'description' => $request->description,
                 'title' => $request->title,
                 'path' => '/uploads/visi/',
                 'photo' => $photo,
-                'id_user' => $user->id,
             ]);
 
             return redirect()->route('visi.index')
@@ -110,7 +107,6 @@ class VisiController extends Controller
 
         try {
             $visi = Visi::findOrfail($id);
-            $user = Auth::user();
 
             $photo = $visi->photo;
 
@@ -123,7 +119,6 @@ class VisiController extends Controller
                 'description' => $request->description,
                 'title' => $request->title,
                 'photo' => $photo,
-                'id_user' => $user->id,
             ]);
 
             return redirect()->route('visi.index')

@@ -18,6 +18,9 @@
     <div class="col-md-7 col-xs-12">
         <div class="box">
             <div class="box box-primary">
+                <div class="box-header">
+                    <h3 class="box-title">Pengguna </h3>
+                </div>
                 <form role="form" action="{{ route('users.update', $data['users']->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('put')

@@ -34,7 +34,7 @@
         <!-- /.login-logo -->
         <div class="login-box-body">
                 <div class="login-logo">
-                    <a href="{{ route('web') }}"><b>Admin</b> <br> kampoengmalang.com</a>
+                    <a href="{{ route('web') }}" class="box-title"><b>Admin</b> <br> Kampoeng Malang</a>
                 </div>
                 @if (session()->has('login.failed'))
                     <div class="alert alert-danger alert-dismissible">

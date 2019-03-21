@@ -18,7 +18,8 @@
         <div class="col-xs-12">
             <div class="box">
                 <div class="box-header">
-                    <a href="{{ route('users.create') }}" class="btn btn-success btn-sm"><span class="fa fa-plus"></span> Tambah data</a>
+                    <h3 class="box-title">Pengguna </h3>
+                    <a href="{{ route('users.create') }}" style="float: right" class="btn btn-success btn-sm"><span class="fa fa-plus"></span> Tambah data</a>
                 </div>
                 @if (session('success'))
                     <div class="alert alert-success alert-dismissible">

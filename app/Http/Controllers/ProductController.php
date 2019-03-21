@@ -147,7 +147,6 @@ class ProductController extends Controller
 
         try {
             $misi = Product::findOrfail($id);
-            $user = Auth::user();
 
             $photo = $misi->photo;
 
@@ -158,7 +157,6 @@ class ProductController extends Controller
 
             $misi->update([
                 'photo' => $photo,
-                'id_user' => $user->id,
             ]);
 
             return redirect()->route('product.index')

@@ -63,7 +63,6 @@ class HomeController extends Controller
                 $background_photo = $this->saveFile('background-photo', $request->file('background_photo'));
             }
 
-            $user = Auth::user();
 
             Home::create([
                 'title' => $request->title,
@@ -71,7 +70,6 @@ class HomeController extends Controller
                 'path' => public_path('uploads/home'),
                 'photo' => $logo,
                 'background_photo' => $background_photo,
-                'id_user' => $user->id,
             ]);
 
             return redirect()->route('home.index')
@@ -112,7 +110,6 @@ class HomeController extends Controller
 
         try {
             $home = Home::findOrFail($id);
-            $user = Auth::user();
 
             $logo = $home->photo;
             $background_photo = $home->background_photo;
@@ -130,7 +127,6 @@ class HomeController extends Controller
             $home->update([
                 'title' => $request->title,
                 'description' => $request->description,
-                'id_user' => $user->id,
                 'photo' => $logo,
                 'background_photo' => $background_photo,
             ]);

@@ -42,12 +42,9 @@ class MenuController extends Controller
             'sub_title' => 'required',
         ]);
 
-        $user = Auth::user();
-
         $menu = Menu::create([
             'title' => $request->title,
             'sub_title' => $request->sub_title,
-            'id_user' => $user->id
         ]);
 
         try {
@@ -87,12 +84,9 @@ class MenuController extends Controller
             'sub_title' => 'required',
         ]);
 
-        $user = Auth::user();
-
          $menu->update([
             'title' => $request->title,
             'sub_title' => $request->sub_title,
-            'id_user' => $user->id
         ]);
 
         try {

@@ -46,7 +46,12 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function () {
 
     Route::resource('/product', 'ProductController', ['except' => ['show', 'destroy', 'create', 'store']]);
 
-    Route::resource('/notice', 'NoticeController');
+    Route::resource('/photo', 'PhotoController');
+
+    Route::resource('/video', 'VidesticeController');
+
+    Route::resource('/contact', 'NoticeController');
+
 
 });
 

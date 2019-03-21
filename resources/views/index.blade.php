@@ -128,7 +128,6 @@
 
                     <div class="row">
                         <section id="advanced-features">
-
                             <div class="features-row bg-white">
                                 <div class="container">
                                     <div class="row">

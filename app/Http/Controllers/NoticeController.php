@@ -52,14 +52,11 @@ class NoticeController extends Controller
                 $photo = $this->saveFile('notice', $request->file('photo'));
             }
 
-            $user = Auth::user();
-
             Notice::create([
                 'description' => $request->description,
                 'title' => $request->title,
                 'path' => '/uploads/notice/',
                 'photo' => $photo,
-                'id_user' => $user->id,
             ]);
 
             return redirect()->route('notice.index')
@@ -110,7 +107,6 @@ class NoticeController extends Controller
 
         try {
             $notice = Notice::findOrfail($id);
-            $user = Auth::user();
 
             $photo = $notice->photo;
 
@@ -123,7 +119,6 @@ class NoticeController extends Controller
                 'description' => $request->description,
                 'title' => $request->title,
                 'photo' => $photo,
-                'id_user' => $user->id,
             ]);
 
             return redirect()->route('notice.index')

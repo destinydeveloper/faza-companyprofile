@@ -52,7 +52,7 @@
                 <h3 class="box-title">Isi konten produk</h3>
                 <a href="{{ route('product.create_content') }}" style="float: right" class="btn btn-success btn-sm"><span class="fa fa-plus"></span> Tambah data</a>
             </div>
-            <div class="box-body no-padding">
+            <div class="box-body no-padding table-responsive">
                 <table class="table table-striped">
                     <tr>
                         <th style="width: 10px; text-align: center">#</th>

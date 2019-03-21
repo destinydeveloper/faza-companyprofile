@@ -17,6 +17,9 @@
     <div class="row">
         <div class="col-xs-12">
             <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">Menu </h3>
+                </div>
                 {{-- <div class="box-header">
                     <a href="{{ route('menu.create') }}" class="btn btn-success"><span class="fa fa-plus"></span> Tambah data</a>
                 </div> --}}
@@ -44,7 +47,7 @@
                                         <td>{{ $data->title }}</td>
                                         <td>{{ $data->sub_title }}</td>
                                         <td>
-                                            <span class="label label-danger">{{ $data->user->name }}</span>
+                                            <span class="label label-info">{{ date('d F Y', strtotime($data->updated_at)) }}</span>
                                         </td>
                                         <td>
                                             <a href="{{ route('menu.edit', $data->id) }}" class="btn btn-warning btn-sm"><span class="fa fa-chain"></span> Edit</a>

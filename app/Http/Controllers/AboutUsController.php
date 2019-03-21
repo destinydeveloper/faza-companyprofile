@@ -52,14 +52,12 @@ class AboutUsController extends Controller
                 $photo = $this->saveFile('about-us', $request->file('photo'));
             }
 
-            $user = Auth::user();
 
             About_us::create([
                 'description' => $request->description,
                 'title' => $request->title,
                 'path' => '/uploads/about_us/',
                 'photo' => $photo,
-                'id_user' => $user->id,
             ]);
 
             return redirect()->route('aboutus.index')

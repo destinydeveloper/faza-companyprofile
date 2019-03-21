@@ -87,7 +87,7 @@ class UsersController extends Controller
     {
         $this->validate($request, [
             'photo' => 'nullable|file|image|mimes:jpeg,png,gif,webp|max:2048',
-            'password' => 'required | string | min:8 | confirmed',
+            // 'password' => 'required | string | min:8 | confirmed',
         ]);
 
         try {
@@ -101,7 +101,6 @@ class UsersController extends Controller
 
             $user->update([
                 'name' => $request->name,
-                'password' => bcrypt($request->password),
                 'email' => $request->email,
                 'photo' => $photo
             ]);
