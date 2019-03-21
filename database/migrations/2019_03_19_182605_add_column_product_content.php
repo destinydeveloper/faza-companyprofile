@@ -26,7 +26,7 @@ class AddColumnProductContent extends Migration
     public function down()
     {
         Schema::table('product_content', function (Blueprint $table) {
-            //
+            $table->dropColumn('link');
         });
     }
 }

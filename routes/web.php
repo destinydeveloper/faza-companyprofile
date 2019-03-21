@@ -23,7 +23,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function () {
     Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
 
     Route::resource('/users', 'UsersController', ['except' => ['show']]);
-    Route::resource('/menu', 'MenuController', ['except' => ['show', 'store', 'destroy']]);
+    Route::resource('/menu', 'MenuController', ['except' => ['show', 'destroy']]);
     Route::resource('/home', 'HomeController', ['except' => ['show', 'destroy', 'create', 'store']]);
     Route::resource('/aboutus', 'AboutUsController', ['except' => ['show', 'destroy', 'create', 'store']]);
     Route::resource('/visi', 'VisiController', ['except' => ['show', 'destroy', 'create', 'store']]);

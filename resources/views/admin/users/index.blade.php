@@ -52,7 +52,7 @@
                                                 @method('delete')
                                                 <div class="btn-group-vertical btn-group-sm">
                                                     <a href="{{ route('users.edit', $user->id) }}" class="btn btn-warning"><span class="fa fa-chain"></span> Edit</a>
-                                                    <button type="submit" class="btn btn-danger" onclick="return confirm('Apakah anda yakin ingin menghapus data ini ?')">
+                                                    <button type="submit" class="btn btn-danger" onclick="return confirm('Jika menghapus data ini akan berpengaruh pada data lain, apakah anda yakin ?')">
                                                         <span class="fa fa-trash"> Hapus</span>
                                                     </button>
                                                 </div>
