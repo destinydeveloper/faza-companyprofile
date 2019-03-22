@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Cohensive\Embed\Facades\Embed;
+use App\Models\Video;
 
 class VideoController extends Controller
 {
@@ -13,7 +15,20 @@ class VideoController extends Controller
      */
     public function index()
     {
-        //
+        $embed = Embed::make('https://www.youtube.com/watch?v=MyKc9ik0G4M')->parseUrl();
+        // Will return Embed class if provider is found. Otherwie will return false - not found. No fancy errors for now.
+        if ($embed) {
+            // Set width of the embed.
+            $embed->setAttribute(['width' => '100%', 'height' => '315']);
+
+            // Print html: '<iframe width="600" height="338" src="//www.youtube.com/embed/uifYHNyH-jA" frameborder="0" allowfullscreen></iframe>'.
+            // Height will be set automatically based on provider width/height ratio.
+            // Height could be set explicitly via setAttr() method.
+            // echo $embed->getHtml();
+            dd($embed->getHtml());
+        }
+
+        return view('admin.video.index', compact('embed'));
     }
 
     /**
@@ -81,4 +96,6 @@ class VideoController extends Controller
     {
         //
     }
+
+
 }

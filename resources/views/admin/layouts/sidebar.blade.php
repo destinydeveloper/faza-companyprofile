@@ -1,4 +1,11 @@
 <ul class="sidebar-menu" data-widget="tree">
+    <li class="header ">
+        <div>
+            <a href="{{route('web')}}" class="btn btn-flat btn-warning" target="_blank" style="width: 100%;">
+                <b>Go to website</b>
+            </a>
+        </div>
+    </li>
     <li class="header">MENU NAVIGATION</li>
     <li class="{{Request::is('admin') ? 'active' : '' }}">
         <a href="{{ route('dashboard.index') }}">
@@ -16,7 +23,7 @@
         </a>
     </li>
     <li class="treeview
-        {{Request::is('admin') || Request::is('admin/users*') || Request::is('admin/menu*')  ? '' : 'active' }} ">
+        {{Request::is('admin') || Request::is('admin/users*') || Request::is('admin/menu*') || Request::is('admin/photo*') || Request::is('admin/video*')  ? '' : 'active' }} ">
         <a href="#">
             <i class="fa fa-list"></i> <span> Content</span>
             <span class="pull-right-container">
@@ -61,7 +68,8 @@
             </li>
         </ul>
     </li>
-    <li class="treeview">
+    <li class="treeview
+        {{Request::is('admin/photo') || Request::is('admin/video*') ? 'active' : '' }} ">
             <a href="#">
                 <i class="fa fa-photo"></i> <span>Galeri</span>
                 <span class="pull-right-container">
@@ -69,11 +77,15 @@
                 </span>
             </a>
             <ul class="treeview-menu">
-                <li><a href="#"><i class="fa fa-file-image-o"></i> Foto</a></li>
-                <li><a href="#"><i class="fa fa-file-movie-o"></i> Video</a></li>
+                <li class="{{Request::is('admin/photo*') ? 'active' : '' }}">
+                    <a href="{{ route('photo.index') }}"><i class="fa fa-file-image-o"></i> Foto</a>
+                </li>
+                <li class="{{Request::is('admin/video*') ? 'active' : '' }}">
+                    <a href="{{ route('video.index') }}"><i class="fa fa-file-movie-o"></i> Video</a>
+                </li>
             </ul>
     </li>
-    <li class="{{Request::is('admin/notice*') ? 'active' : '' }}">
+    <li class="{{Request::is('admin/contact*') ? 'active' : '' }}">
         <a href="{{ route('aboutus.index') }}">
             <i class="fa fa-address-card"></i> <span> Kontak Kami</span>
         </a>

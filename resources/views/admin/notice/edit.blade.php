@@ -18,6 +18,9 @@
     <div class="col-md-7 col-xs-12">
         <div class="box">
             <div class="box box-primary">
+                <div class="box-header">
+                    <h3 class="box-title">Pengumuman </h3>
+                </div>
                     <div class="box-body">
                         <form action="{{ route('notice.update', $data['notice']->id) }}" method="post" enctype="multipart/form-data">
                             @csrf

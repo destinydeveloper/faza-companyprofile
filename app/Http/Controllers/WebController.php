@@ -12,6 +12,9 @@ use App\Models\Misi_content;
 use App\Models\Product;
 use App\Models\Product_content;
 use App\Models\Notice;
+use App\Models\Photo;
+use App\Models\Video;
+use App\Models\Contact;
 
 
 class WebController extends Controller
@@ -63,6 +66,10 @@ class WebController extends Controller
         // Notice
         $data['notice'] = Notice::find(1);
         // Notice
+
+        // Photo
+        $data['photo'] = Photo::all();
+        // Photo
 
         return view('index', compact('data'));
     }

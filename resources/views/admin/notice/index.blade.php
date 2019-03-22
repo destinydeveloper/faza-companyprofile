@@ -38,7 +38,7 @@
                         </div>
                         <div class="form-group">
                             <label>Foto</label>
-                            <img class="img-responsive" id="logo" src="{{ url('/') }}{{$data['notice']->path}}{{$data['notice']->photo}} " width="50%" height="50%" alt="" srcset="">
+                            <img class="img-responsive" id="logo" src="{{ url('/') }}{{$data['notice']->path}}{{$data['notice']->photo}}" width="50%" height="50%" alt="" srcset="">
                         </div>
                     </div>
                 </form>

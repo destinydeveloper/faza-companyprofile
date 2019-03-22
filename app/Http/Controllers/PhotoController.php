@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Photo;
+use File;
+use Image;
 
 class PhotoController extends Controller
 {
@@ -13,7 +16,8 @@ class PhotoController extends Controller
      */
     public function index()
     {
-        //
+        $data['photo'] = Photo::all();
+        return view('admin.photo.index', compact('data'));
     }
 
     /**
@@ -23,7 +27,7 @@ class PhotoController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.photo.create');
     }
 
     /**
@@ -34,7 +38,28 @@ class PhotoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'photo' => 'required|file|image|mimes:jpeg,png,gif,webp|max:2048',
+        ]);
+
+        try {
+            $photo = null;
+
+            if ($request->hasFile('photo')) {
+                $photo = $this->saveFile('photo', $request->file('photo'));
+            }
+
+            Photo::create([
+                'path' => '/uploads/photo/',
+                'photo' => $photo,
+            ]);
+
+            return redirect()->route('photo.index')
+                             ->with(['success' => 'Data berhasil ditambahkan']);
+        } catch (\Exception $e) {
+            return redirect()->back()
+                ->with(['error' => $e->getMessage()]);
+        }
     }
 
     /**
@@ -56,7 +81,8 @@ class PhotoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data['photo'] = Photo::findOrFail($id);
+        return view('admin.photo.edit', compact('data'));
     }
 
     /**
@@ -68,7 +94,30 @@ class PhotoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'photo' => 'nullable|file|image|mimes:jpeg,png,gif,webp|max:2048',
+        ]);
+
+        try {
+            $photo = Photo::findOrfail($id);
+
+            $dataPhoto = $photo->photo;
+
+            if ($request->hasFile('photo')) {
+                !empty($photo) ? File::delete(public_path('uploads/photo/' . $dataPhoto)) : null;
+                $dataPhoto = $this->saveFile('photo', $request->file('photo'));
+            }
+
+            $photo->update([
+                'photo' => $dataPhoto,
+            ]);
+
+            return redirect()->route('photo.index')
+                             ->with(['success' => 'Data berhasil diubah']);
+        } catch (\Exception $e) {
+            return redirect()->back()
+                ->with(['error' => $e->getMessage()]);
+        }
     }
 
     /**
@@ -79,6 +128,24 @@ class PhotoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try{
+            Photo::findOrfail($id)->delete();
+            return redirect()->route('photo.index')
+                             ->with(['success' => 'Data berhasil dihapus']);
+        } catch(\Exception $e) {
+            return redirect()->back()->with(['error' => $e->getMessage()]);
+        }
+    }
+
+    private function saveFile($name, $photo)
+    {
+        $images = str_slug($name) . time() . '.' . $photo->getClientOriginalExtension();
+        $path = public_path('uploads/photo');
+
+        if (!File::isDirectory($path)) {
+            File::makeDirectory($path, 0777, true, true);
+        }
+        Image::make($photo)->save($path . '/' . $images);
+        return $images;
     }
 }

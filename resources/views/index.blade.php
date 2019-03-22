@@ -254,7 +254,7 @@
     <!--==========================
             GALERI FOTO
     ============================-->
-        <section id="gallery">
+        <section id="gallery" class="section-bg">
             <div class="container-fluid">
                 <div class="section-header">
                     <h3 class="section-title">Foto</h3>
@@ -265,63 +265,16 @@
                 </div>
 
                 <div class="row no-gutters">
-
-                    <div class="col-lg-4 col-md-6">
-                        <div class="gallery-item wow fadeInUp">
-                            <a href="{{ asset('assets/frontend/img/gallery/gallery-1.jpg') }}" class="gallery-popup">
-                                <img src="{{ asset('assets/frontend/img/gallery/gallery-1.jpg') }}" alt="">
-                            </a>
+                    @foreach ($data['photo'] as $foto)
+                        <div class="col-lg-4 col-md-6" >
+                            <div class="gallery-item wow fadeInUp" style="margin: 2.5px">
+                                <a href="{{ url('/') }}{{ $foto->path }}{{ $foto->photo }}" class="gallery-popup" >
+                                    <img src="{{ url('/') }}{{ $foto->path }}{{ $foto->photo }}" alt="" >
+                                </a>
+                                <div ></div>
+                            </div>
                         </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6">
-                        <div class="gallery-item wow fadeInUp">
-                            <a href="{{ asset('assets/frontend/img/gallery/gallery-2.jpg') }}" class="gallery-popup">
-                                <img src="{{ asset('assets/frontend/img/gallery/gallery-2.jpg') }}" alt="">
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6">
-                        <div class="gallery-item wow fadeInUp">
-                            <a href="{{ asset('assets/frontend/img/gallery/gallery-3.jpg') }}" class="gallery-popup">
-                                <img src="{{ asset('assets/frontend/img/gallery/gallery-3.jpg') }}" alt="">
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6">
-                        <div class="gallery-item wow fadeInUp">
-                            <a href="{{ asset('assets/frontend/img/gallery/gallery-4.jpg') }}" class="gallery-popup">
-                                <img src="{{ asset('assets/frontend/img/gallery/gallery-4.jpg') }}" alt="">
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6">
-                        <div class="gallery-item wow fadeInUp">
-                            <a href="{{ asset('assets/frontend/img/gallery/gallery-5.jpg') }}" class="gallery-popup">
-                                <img src="{{ asset('assets/frontend/img/gallery/gallery-5.jpg') }}" alt="">
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6">
-                        <div class="gallery-item wow fadeInUp">
-                            <a href="{{ asset('assets/frontend/img/gallery/gallery-6.jpg') }}" class="gallery-popup">
-                                <img src="{{ asset('assets/frontend/img/gallery/gallery-6.jpg') }}" alt="">
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6">
-                        <div class="gallery-item wow fadeInUp">
-                            <a href="{{ asset('assets/frontend/img/gallery/gallery-6.jpg') }}" class="gallery-popup">
-                                <img src="{{ asset('assets/frontend/img/gallery/gallery-6.jpg') }}" alt="">
-                            </a>
-                        </div>
-                    </div>
-
+                    @endforeach
                 </div>
 
             </div>
@@ -343,7 +296,7 @@
                 <div class="row no-gutters">
                     <div class="col-lg-4 col-md-6">
                         <div class="fadeInUp gallery-item">
-                            <iframe width="100%" height="315" src="https://www.youtube.com/embed/AyciIyk9jVw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            <iframe width="100%" height="315" src="https://www.youtube.com/watch?v=bwpt-fayooU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-6">
@@ -353,12 +306,12 @@
                     </div>
                     <div class="col-lg-4 col-md-6">
                         <div class="fadeInUp gallery-item">
-                            <iframe width="100%" height="315" src="https://www.youtube.com/embed/AyciIyk9jVw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            <iframe width="100%" height="315" src="https://youtu.be/HUEaGsYweeo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-6">
                         <div class="fadeInUp gallery-item">
-                            <iframe width="100%" height="315" src="https://www.youtube.com/embed/AyciIyk9jVw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                <iframe src="https://www.youtube.com/embed/MyKc9ik0G4M?rel=0&wmode=transparent" width="100%" height="315" allowfullscreen="" frameborder="0" sandbox="allow-scripts allow-same-origin allow-presentation" layout="responsive"></iframe>
                         </div>
                     </div>
                 </div>
@@ -494,7 +447,7 @@
     <script src="{{ asset('assets/frontend/lib/magnific-popup/magnific-popup.min.js') }}"></script>
 
     <!-- Contact Form JavaScript File -->
-    <script src="{{ asset('assets/frontend/contactform/contactform.js') }}"></script>
+    {{-- <script src="{{ asset('assets/frontend/contactform/contactform.js') }}"></script> --}}
 
     <!-- Template Main Javascript File -->
     <script src="{{ asset('assets/frontend/js/main.js') }}"></script>

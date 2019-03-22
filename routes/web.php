@@ -46,24 +46,13 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function () {
 
     Route::resource('/product', 'ProductController', ['except' => ['show', 'destroy', 'create', 'store']]);
 
-    Route::resource('/photo', 'PhotoController');
+    Route::resource('/notice', 'NoticeController', ['except' => ['show', 'destroy', 'create', 'store']]);
+    Route::resource('/photo', 'PhotoController', ['except' => ['show']]);
+    Route::resource('/video', 'VideoController', ['except' => ['show']]);
 
-    Route::resource('/video', 'VidesticeController');
 
     Route::resource('/contact', 'NoticeController');
 
 
 });
 
-
-// Auth::routes();
-
-// Route::get('/home', 'HomeController@index')->name('home');
-
-
-
-// Route::get('/admin/editor', function () {
-    //     return view('admin.editors');
-    // });
-
-    // Route::get('users/{id}', });

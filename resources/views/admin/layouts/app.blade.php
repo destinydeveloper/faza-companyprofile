@@ -87,13 +87,7 @@
                                 <!-- Menu Footer-->
                             </ul>
                         </li>
-
                     </ul>
-                </div>
-                <div style="margin-top:1%; margin-bottom:0.5%">
-                    <a href="{{route('web')}}" class="btn btn-flat btn-warning" target="_blank">
-                        <b>Go to website</b>
-                    </a>
                 </div>
             </nav>
         </header>
