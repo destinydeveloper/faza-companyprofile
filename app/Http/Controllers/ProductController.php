@@ -32,7 +32,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('admin.product.create');
+        abort(404);
+        // return view('admin.product.create');
     }
 
     public function createContent()
@@ -60,12 +61,9 @@ class ProductController extends Controller
                 $photo = $this->saveFile('product', $request->file('photo'));
             }
 
-            $user = Auth::user();
-
             Product::create([
                 'path' => '/uploads/product/',
                 'photo' => $photo,
-                'id_user' => $user->id,
             ]);
 
             return redirect()->route('product.index')
@@ -86,11 +84,19 @@ class ProductController extends Controller
             'description' => 'required',
         ]);
 
+        $link = $request->link;
+
+        if ($link === '#') {
+            $link = '#';
+        } else {
+            $link = 'https://'.$request->link;
+        }
+
         try {
             Product_content::create([
                 'id_product' => $product->id,
                 'title' => $request->title,
-                'link' => $request->link,
+                'link' => $link,
                 'description' => $request->description,
             ]);
 
@@ -177,9 +183,17 @@ class ProductController extends Controller
         try {
             $product_content = Product_content::findOrfail($id);
 
+            $link = $request->link;
+
+            if ($link === '#') {
+                $link = '#';
+            } else {
+                $link = 'https://'.$request->link;
+            }
+
             $product_content->update([
                 'title' => $request->title,
-                'link' => $request->link,
+                'link' => $link,
                 'description' => $request->description,
             ]);
 

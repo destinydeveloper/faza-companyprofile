@@ -31,15 +31,17 @@
                         <div class="row">
                             @foreach ($data['photo'] as $data)
                                 <div class="col-md-4" style="text-align: center" >
+                                    <span style="float: right" class="label label-info">{{ date('d F Y', strtotime($data->updated_at)) }}</span>
+                                    <br>
                                     <img src="{{ url('/') }}{{ $data->path }}{{ $data->photo }}" alt="" width="100%" height="300px">
-                                        <div style="margin: 10px 0px">
-                                                <form action="{{ route('photo.destroy', $data->id) }}" method="post">
-                                                @csrf
-                                                @method('delete')
-                                                <a href="{{ route('photo.edit', $data->id) }}" class="btn btn-warning btn-sm" ><span class="fa fa-chain"></span> Ubah</a>
-                                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Apakah anda yakin ingin menghapus data ini ?')">
-                                                        <span class="fa fa-trash"></span> Hapus
-                                                </button>
+                                    <div style="margin: 10px 0px">
+                                        <form action="{{ route('photo.destroy', $data->id) }}" method="post">
+                                            @csrf
+                                            @method('delete')
+                                            <a href="{{ route('photo.edit', $data->id) }}" class="btn btn-warning btn-sm" ><span class="fa fa-chain"></span> Ubah</a>
+                                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Apakah anda yakin ingin menghapus data ini ?')">
+                                                <span class="fa fa-trash"></span> Hapus
+                                            </button>
                                             </form>
                                         </div>
                                     &nbsp;

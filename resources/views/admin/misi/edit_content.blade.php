@@ -63,9 +63,9 @@
                         @php $i = 1 @endphp
                         @foreach ($data['misi_content'] as $data)
                             <tr >
-                                <td style="text-align: center">{{ $i++ }}.</td>
+                                <td style="text-align: center;vertical-align: middle">{{ $i++ }}.</td>
                                 <td>{{ $data['description'] }}</td>
-                                <td>
+                                <td style="text-align: center;vertical-align: middle">
                                     <span class="label label-info">{{ date('d F Y', strtotime($data->updated_at)) }}</span>
                                 </td>
                             </tr>

@@ -26,6 +26,8 @@
                     <div class="box-header">
                         <h3 class="box-title">Visi </h3>
                         <a href="{{ route('visi.edit', $data['visi']->id) }}" style="float: right" class="btn btn-warning btn-sm"><span class="fa fa-chain"></span> Ubah</a>
+                        <br>
+                        <span class="label label-info">{{ date('d F Y', strtotime($data['visi']->updated_at)) }}</span>
                     </div>
                     <div class="box-body">
                         <div class="form-group">

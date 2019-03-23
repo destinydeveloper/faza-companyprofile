@@ -26,7 +26,8 @@ class MenuController extends Controller
      */
     public function create()
     {
-        return view('admin.menu.create');
+        abort(404);
+        // return view('admin.menu.create');
     }
 
     /**
@@ -42,7 +43,7 @@ class MenuController extends Controller
             'sub_title' => 'required',
         ]);
 
-        $menu = Menu::create([
+        Menu::create([
             'title' => $request->title,
             'sub_title' => $request->sub_title,
         ]);

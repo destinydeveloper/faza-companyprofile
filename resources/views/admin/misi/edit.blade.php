@@ -34,7 +34,7 @@
                         <div class="form-group">
                             <label for="judul">Judul</label>
                             <input type="text" id="judul" name="title" class="title form-control" style="background: white; font-size: 15px"
-                                   value="{{ $data['misi']->title }}" required>
+                                   value="{{ $data['misi']->title }}" autofocus="on" required>
                         </div>
                         <div class="form-group">
                             <label for="exampleInputFile">Upload Logo</label>

@@ -19,7 +19,7 @@
        folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="{{ asset('assets/admin/dist/css/skins/_all-skins.min.css') }}">
 
-    <link rel="stylesheet" href="{{ asset('assets/admin/bower_components/bootstrap-daterangepicker/daterangepicker.css') }}">
+    {{-- <link rel="stylesheet" href="{{ asset('assets/admin/bower_components/bootstrap-daterangepicker/daterangepicker.css') }}"> --}}
     <!-- bootstrap wysihtml5 - text editor -->
     <link rel="stylesheet" href="{{ asset('assets/admin/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/admin/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') }}">
@@ -75,7 +75,7 @@
                                 </li>
                                 <li class="user-footer">
                                     <div class="pull-left">
-                                        <a href="#" class="btn btn-default btn-flat">Ubah Password</a>
+                                        <a href="{{ route('users.showChange') }}" class="btn btn-default btn-flat">Ubah Password</a>
                                     </div>
                                     <div class="pull-right">
                                         <form action="{{ route('logout') }}" method="post">

@@ -23,9 +23,12 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function () {
     Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
 
     Route::resource('/users', 'UsersController', ['except' => ['show']]);
-    Route::resource('/menu', 'MenuController', ['except' => ['show', 'destroy']]);
-    Route::resource('/home', 'HomeController', ['except' => ['show', 'destroy', 'create', 'store']]);
-    Route::resource('/aboutus', 'AboutUsController', ['except' => ['show', 'destroy', 'create', 'store']]);
+    Route::get('/users/change', 'UsersController@showChangePassword')->name('users.showChange');
+    Route::post('/users/change/save', 'UsersController@changePassword')->name('users.saveChange');
+
+    Route::resource('/menu', 'MenuController', ['except' => ['show', 'destroy', 'store']]);
+    Route::resource('/home', 'HomeController', ['except' => ['show', 'destroy', 'store']]);
+    Route::resource('/aboutus', 'AboutUsController', ['except' => ['show', 'destroy', 'store']]);
     Route::resource('/visi', 'VisiController', ['except' => [ 'store', 'show', 'destroy']]);
 
     // Misi Content
@@ -35,7 +38,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function () {
     Route::put('/misi/edit_content/{content}', 'MisiController@updateContent')->name('misi.update_content');
     Route::delete('/misi/{content}', 'MisiController@destroyContent')->name('misi.destroy_content');
 
-    Route::resource('/misi', 'MisiController', ['except' => ['show', 'destroy', 'create', 'store']]);
+    Route::resource('/misi', 'MisiController', ['except' => ['show', 'destroy', 'store']]);
 
     // Product Content
     Route::get('/product/content', 'ProductController@createContent')->name('product.create_content');
@@ -44,7 +47,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function () {
     Route::put('/product/edit_content/{content}', 'ProductController@updateContent')->name('product.update_content');
     Route::delete('/product/{content}', 'ProductController@destroyContent')->name('product.destroy_content');
 
-    Route::resource('/product', 'ProductController', ['except' => ['show', 'destroy', 'create', 'store']]);
+    Route::resource('/product', 'ProductController', ['except' => ['show', 'destroy', 'store']]);
 
     Route::resource('/notice', 'NoticeController', ['except' => ['show', 'destroy', 'create', 'store']]);
     Route::resource('/photo', 'PhotoController', ['except' => ['show']]);

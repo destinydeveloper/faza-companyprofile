@@ -4,7 +4,7 @@
 
 @section('admin-role', 'Administrasi')
 
-@section('content-title', 'Tambah produk')
+@section('content-title', 'Tambah konten produk')
 
 @section('breadcrumb')
     <ol class="breadcrumb">
@@ -39,7 +39,7 @@
                         @endif
                         <div class="form-group">
                             <label for="judul">Judul</label>
-                            <input type="text" name="title" class="form-control" placeholder="Masukan judul produk" required>
+                            <input type="text" name="title" class="form-control" placeholder="Masukan judul produk" required autofocus="on">
                         </div>
                         <div class="form-group">
                             <label for="link">Link</label>
@@ -74,17 +74,12 @@
                         </tr>
                         @php $i = 1 @endphp
                         @foreach ($data['product_content'] as $data)
-
-                        @php
-                            $link;
-                            $data->link !== '#' ?  $link = 'http://'. "" .$data->link : $link = '#'
-                        @endphp
                             <tr >
                                 <td style="text-align: center">{{ $i++ }}.</td>
                                 <td>{{ $data['title'] }}</td>
-                                <td><a href="{{ $link }}">{{ $link }}</a></td>
+                                <td style="text-align: center"><a href="{{ $data->link }}" target="_blank">{{ $data->link }}</a></td>
                                 <td>{{ $data['description'] }}</td>
-                                <td>
+                                <td style="vertical-align: middle">
                                     <span class="label label-info">{{ date('d F Y', strtotime($data->updated_at)) }}</span>
                                 </td>
                             </tr>

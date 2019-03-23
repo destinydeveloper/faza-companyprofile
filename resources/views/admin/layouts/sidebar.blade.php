@@ -25,7 +25,7 @@
     <li class="treeview
         {{Request::is('admin') || Request::is('admin/users*') || Request::is('admin/menu*') || Request::is('admin/photo*') || Request::is('admin/video*') || Request::is('admin/contact*')   ? '' : 'active' }} ">
         <a href="#">
-            <i class="fa fa-list"></i> <span> Content</span>
+            <i class="fa fa-list"></i> <span> Konten menu</span>
             <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -87,7 +87,7 @@
     </li>
     <li class="{{Request::is('admin/contact*') ? 'active' : '' }}">
         <a href="{{ route('contact.index') }}">
-            <i class="fa fa-address-card"></i> <span> Kontak Kami</span>
+            <i class="fa fa-address-card"></i> <span> Kontak kami</span>
         </a>
     </li>
 </ul>

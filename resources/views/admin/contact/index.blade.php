@@ -26,6 +26,8 @@
                     <div class="box-header">
                         <h3 class="box-title">Kontak kami </h3>
                         <a href="{{ route('contact.edit', $data['contact']->id) }}" style="float: right" class="btn btn-warning btn-sm"><span class="fa fa-chain"></span> Ubah</a>
+                        <br>
+                        <span class="label label-info">{{ date('d F Y', strtotime($data['contact']->updated_at)) }}</span>
                     </div>
                     <div class="box-body">
                         <div class="form-group">

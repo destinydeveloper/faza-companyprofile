@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Photo;
+use App\Models\Video;
+use App\User;
+use App\Models\Menu;
 
 class DashboardController extends Controller
 {
@@ -13,6 +17,9 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view('admin.index');
+        $jml_foto_video = count(Photo::all()) + count(Video::all());
+        $jml_user = count(User::all());
+        $jml_menu = count(Menu::all());
+        return view('admin.index', compact(['jml_foto_video', 'jml_user', 'jml_menu']));
     }
 }

@@ -31,7 +31,8 @@ class MisiController extends Controller
      */
     public function create()
     {
-        return view('admin.misi.create');
+        abort(404);
+        // return view('admin.misi.create');
     }
 
     public function createContent()
@@ -61,13 +62,10 @@ class MisiController extends Controller
                 $photo = $this->saveFile('misi', $request->file('photo'));
             }
 
-            $user = Auth::user();
-
             Misi::create([
                 'title' => $request->title,
                 'path' => '/uploads/misi/',
                 'photo' => $photo,
-                'id_user' => $user->id,
             ]);
 
             return redirect()->route('misi.index')
@@ -148,7 +146,6 @@ class MisiController extends Controller
 
         try {
             $misi = Misi::findOrfail($id);
-            $user = Auth::user();
 
             $photo = $misi->photo;
 
@@ -160,7 +157,6 @@ class MisiController extends Controller
             $misi->update([
                 'title' => $request->title,
                 'photo' => $photo,
-                'id_user' => $user->id,
             ]);
 
             return redirect()->route('misi.index')

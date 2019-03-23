@@ -8,7 +8,7 @@
 
 @section('breadcrumb')
     <ol class="breadcrumb">
-        <li><a href="{{ route('misi.index') }}"><i class="fa fa-product-hunt"></i> Produk</a></li>
+        <li><a href="{{ route('product.index') }}"><i class="fa fa-product-hunt"></i> Produk</a></li>
         <li class="active">Home</li>
     </ol>
 @endsection
@@ -31,6 +31,8 @@
             <div class="box-header">
                 <h3 class="box-title">Produk </h3>
                 <a href="{{ route('product.edit', $data['product']->id) }}" style="float: right" class="btn btn-warning btn-sm"><span class="fa fa-chain"></span> Ubah</a>
+                <br>
+                <span class="label label-info">{{ date('d F Y', strtotime($data['product']->updated_at)) }}</span>
             </div>
             <div class="box-body ">
                 <div class="form-group">
@@ -64,14 +66,10 @@
                     @php $i = 1 ; $link  @endphp
                     @foreach ($data['product_content'] as $data)
 
-                    @php
-                        $data->link !== '#' ?  $link = 'http://'. "" .$data->link : $link = '#'
-                    @endphp
-
                         <tr>
                             <td style="text-align: center; vertical-align: middle">{{ $i++ }}. </td>
                             <td style=" vertical-align: middle; text-align: center">{{ $data->title }}</td>
-                            <td style=" vertical-align: middle; text-align: center"> <a href="{{ $link }}">{{ $link }}</a></td>
+                            <td style=" vertical-align: middle; text-align: center"> <a href="{{ $data->link }}">{{ $data->link }}</a></td>
                             <td style=" vertical-align: middle">{{ $data->description }}</td>
                             <td style="text-align: center; vertical-align: middle">
                                 <form action="{{ route('product.destroy_content', $data->id) }}" method="post">

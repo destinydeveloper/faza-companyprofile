@@ -35,7 +35,7 @@
                                     <th>#</th>
                                     <th>Judul</th>
                                     <th>Sub-judul</th>
-                                    <th>Pengedit</th>
+                                    <th>Update terakhir</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>

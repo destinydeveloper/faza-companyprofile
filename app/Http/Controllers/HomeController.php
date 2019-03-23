@@ -33,7 +33,8 @@ class HomeController extends Controller
      */
     public function create()
     {
-        return view('admin.home.create');
+        abort(404);
+        // return view('admin.home.create');
     }
 
     /**

@@ -39,7 +39,7 @@
                         @endif
                         <div class="form-group">
                             <label for="judul">Deskripsi</label>
-                            <textarea name="description" id="judul" cols="30" rows="5" class="form-control" style="background: white; font-size: 15px" required>{{ old('title') }}</textarea>
+                            <textarea name="description" placeholder="Masukan deskripsi" id="judul" cols="30" rows="5" class="form-control" style="background: white; font-size: 15px" autofocus="on" required>{{ old('title') }}</textarea>
                         </div>
                         <div class="box-footer text-center">
                             <input type="submit" class="btn btn-primary btn-block" value="Simpan">
@@ -62,9 +62,9 @@
                         @php $i = 1 @endphp
                         @foreach ($data['misi_content'] as $data)
                             <tr >
-                                <td style="text-align: center">{{ $i++ }}.</td>
+                                <td style="text-align: center;vertical-align: middle">{{ $i++ }}.</td>
                                 <td>{{ $data['description'] }}</td>
-                                <td>
+                                <td style="text-align: center; vertical-align: middle">
                                     <span class="label label-info">{{ date('d F Y', strtotime($data->updated_at)) }}</span>
                                 </td>
                             </tr>

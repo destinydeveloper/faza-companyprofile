@@ -28,7 +28,8 @@ class AboutUsController extends Controller
      */
     public function create()
     {
-        return view('admin.aboutus.create');
+        abort(404);
+        // return view('admin.aboutus.create');
     }
 
     /**
@@ -108,7 +109,6 @@ class AboutUsController extends Controller
 
         try {
             $aboutus = About_us::findOrfail($id);
-            $user = Auth::user();
 
             $photo = $aboutus->photo;
 
@@ -121,7 +121,6 @@ class AboutUsController extends Controller
                 'description' => $request->description,
                 'title' => $request->title,
                 'photo' => $photo,
-                'id_user' => $user->id,
             ]);
 
             return redirect()->route('aboutus.index')

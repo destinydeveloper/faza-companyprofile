@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use App\User;
 use File;
 use Image;
@@ -16,7 +18,14 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $data['users'] = User::all();
+        $user = Auth::user();
+
+        if ($user->status == 0) {
+            $data['users'] = User::query()->where('status', '=', 0)->get();
+        } else {
+            $data['users'] = User::all();
+        }
+
         return view('admin.users.index', compact('data'));
     }
 
@@ -53,11 +62,12 @@ class UsersController extends Controller
                 'username' => $request->username,
                 'password' => bcrypt($request->password),
                 'email' => $request->email,
-                'photo' => $photo
+                'photo' => $photo,
+                'status' => 0,
             ]);
 
             return redirect()->route('users.index')
-                ->with(['success' => '<strong> '.$users->name.' </strong> Ditambahkan']);
+                ->with(['success' => 'Data berhasil ditambahkan']);
         } catch (\Exception $e) {
             return redirect()->back()
                 ->with(['error' => $e->getMessage()]);
@@ -106,7 +116,7 @@ class UsersController extends Controller
             ]);
 
             return redirect(route('users.index'))
-                ->with(['success' => '<b>'.$user->name.'</b> Diedit']);
+                ->with(['success' => 'Data berhasil Diedit']);
         } catch (\Exception $e) {
             return redirect()->back()
                 ->with(['error' => $e->getMessage()]);
@@ -127,7 +137,7 @@ class UsersController extends Controller
         }
         $user->delete();
 
-        return redirect()->back()->with(['success' => $user->name. 'Telah Dihapus!']);
+        return redirect()->back()->with(['success' => 'Data berhasil dihapus']);
     }
 
     private function saveFile($name, $photo)
@@ -140,5 +150,35 @@ class UsersController extends Controller
         }
         Image::make($photo)->resize(150, 150)->save($path . '/' . $images);
         return $images;
+    }
+
+    public function showChangePassword() {
+        return view('admin.change_password');
+    }
+
+    public function changePassword(Request $request) {
+        $login = Auth::user();
+
+        $request->validate([
+            'oldPassword' => 'required',
+            'password' => 'required | string | min:8 | confirmed',
+        ]);
+
+        $username = $request->username;
+        $oldPassword = $request->oldPassword;
+
+        if ($username == $login->username && Hash::check($oldPassword, $login->password)) {
+            $user = User::findOrFail($login->id);
+
+            $user->update([
+                'password' => bcrypt($request->password),
+            ]);
+
+            return redirect(route('users.showChange'))
+                   ->with(['success' => 'Password berhasil dirubah']);
+            } else {
+            return redirect(route('users.showChange'))
+                   ->with(['error' => 'Ubah password gagal']);
+        }
     }
 }
