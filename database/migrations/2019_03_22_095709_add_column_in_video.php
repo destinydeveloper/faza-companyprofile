@@ -14,7 +14,7 @@ class AddColumnInVideo extends Migration
     public function up()
     {
         Schema::table('video', function (Blueprint $table) {
-            $table->string('embed_file')->after('link_video');
+            $table->text('embed_file')->after('link_video');
         });
     }
 
@@ -26,7 +26,7 @@ class AddColumnInVideo extends Migration
     public function down()
     {
         Schema::table('video', function (Blueprint $table) {
-            //
+            $table->dropColumn('embed_file');
         });
     }
 }

@@ -294,26 +294,14 @@
                 </div>
 
                 <div class="row no-gutters">
-                    <div class="col-lg-4 col-md-6">
-                        <div class="fadeInUp gallery-item">
-                            <iframe width="100%" height="315" src="https://www.youtube.com/watch?v=bwpt-fayooU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    @foreach ($data['video'] as $video)
+                        <div class="col-lg-4 col-md-6">
+                            <div class="fadeInUp gallery-item">
+                                {!! $video->embed_file !!}
+                                {{-- <iframe width="100%" height="315" src="https://www.youtube.com/embed/AyciIyk9jVw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> --}}
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="fadeInUp gallery-item">
-                            <iframe width="100%" height="315" src="https://www.youtube.com/embed/AyciIyk9jVw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="fadeInUp gallery-item">
-                            <iframe width="100%" height="315" src="https://youtu.be/HUEaGsYweeo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="fadeInUp gallery-item">
-                                <iframe src="https://www.youtube.com/embed/MyKc9ik0G4M?rel=0&wmode=transparent" width="100%" height="315" allowfullscreen="" frameborder="0" sandbox="allow-scripts allow-same-origin allow-presentation" layout="responsive"></iframe>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
 
             </div>
@@ -333,12 +321,12 @@
                     <div class="col-lg-4 col-md-4 text-center">
                         <div class="contact-about">
                             {{-- <h3>LOGO KAMPOENG MALANG</h3> --}}
-                            <img src="{{ asset('assets/frontend/img/logo1.png') }}" width="100%" height="200" alt="header logo" title="logo">
+                            <img src="{{ url('/') }}{{ $data['home']->path }}{{ $data['home']->photo }}" width="100%" height="200" alt="header logo" title="logo">
 
-                            <div class="social-links">
-                                <a href="#" class="twitter"><i class="fa fa-twitter"></i></a>
-                                <a href="#" class="facebook"><i class="fa fa-facebook"></i></a>
-                                <a href="#" class="instagram"><i class="fa fa-instagram"></i></a>
+                            <div class="social-links mt-2">
+                                <a href="{{ $data['contact']->twitter_link }}" class="twitter" target="_blank"><i class="fa fa-twitter"></i></a>
+                                <a href="{{ $data['contact']->facebook_link }}" class="facebook" target="_blank"><i class="fa fa-facebook"></i></a>
+                                <a href="{{ $data['contact']->instagram_link }}" class="instagram" target="_blank"><i class="fa fa-instagram"></i></a>
                             </div>
                         </div>
                     </div>
@@ -347,17 +335,17 @@
                         <div class="info">
                             <div>
                                 <i class="ion-ios-location-outline"></i>
-                                <p>A108 Adam Street<br>New York, NY 535022</p>
+                                <p> {{ $data['contact']->address }}</p>
                             </div>
 
                             <div>
                                 <i class="ion-ios-email-outline"></i>
-                                <p>info@example.com</p>
+                                <p><a style="color: #333333" href="mailto:{{ $data['contact']->email }}">{{ $data['contact']->email }}</a></p>
                             </div>
 
                             <div>
                                 <i class="ion-ios-telephone-outline"></i>
-                                <p>+1 5589 55488 55s</p>
+                                <p>{{ $data['contact']->telp }}</p>
                             </div>
 
                         </div>
@@ -367,7 +355,7 @@
                         <div class="form">
                             <div id="sendmessage">Your message has been sent. Thank you!</div>
                             <div id="errormessage"></div>
-                            <form action="#" method="post" role="form" class="contactForm">
+                            {{-- <form action="#" method="post" role="form" class="contactForm"> --}}
                                 <div class="form-row">
                                     <div class="form-group col-lg-6">
                                         <input type="text" name="name" class="form-control" id="name" placeholder="Your Name"
@@ -390,8 +378,9 @@
                                               data-msg="Please write something for us" placeholder="Message"></textarea>
                                     {{-- <div class="validation"></div> --}}
                                 </div>
+                                {{-- type="submit" --}}
                                 <div class="text-center"><button type="submit" title="Send Message" onclick="alert('Fitur belum tersedia')">Send Message</button></div>
-                            </form>
+                            {{-- </form> --}}
                         </div>
                     </div>
 
@@ -413,12 +402,6 @@
                         &copy; Copyright <strong>Kampoeng Malang {{date('Y')}}</strong>. All Rights Reserved
                     </div>
                     <div class="credits">
-                        <!--
-              All the links in the footer should remain intact.
-              You can delete the links only if you purchased the pro version.
-              Licensing information: https://bootstrapmade.com/license/
-              Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=Avilon
-            -->
                         Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
                     </div>
                 </div>

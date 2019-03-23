@@ -26,7 +26,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function () {
     Route::resource('/menu', 'MenuController', ['except' => ['show', 'destroy']]);
     Route::resource('/home', 'HomeController', ['except' => ['show', 'destroy', 'create', 'store']]);
     Route::resource('/aboutus', 'AboutUsController', ['except' => ['show', 'destroy', 'create', 'store']]);
-    Route::resource('/visi', 'VisiController', ['except' => ['show', 'destroy', 'create', 'store']]);
+    Route::resource('/visi', 'VisiController', ['except' => [ 'store', 'show', 'destroy']]);
 
     // Misi Content
     Route::get('/misi/content', 'MisiController@createContent')->name('misi.create_content');
@@ -50,9 +50,9 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function () {
     Route::resource('/photo', 'PhotoController', ['except' => ['show']]);
     Route::resource('/video', 'VideoController', ['except' => ['show']]);
 
-
-    Route::resource('/contact', 'NoticeController');
+    Route::resource('/contact', 'ContactController');
 
 
 });
 
+// get create diberi status 404

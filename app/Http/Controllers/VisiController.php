@@ -28,7 +28,8 @@ class VisiController extends Controller
      */
     public function create()
     {
-        return view('admin.visi.create');
+        abort(404);
+        // return view('admin.visi.create');
     }
 
     /**

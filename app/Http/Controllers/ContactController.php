@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Cohensive\Embed\Facades\Embed;
-use App\Models\Video;
+use App\Models\Contact;
 
-class VideoController extends Controller
+class ContactController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +14,8 @@ class VideoController extends Controller
      */
     public function index()
     {
-        $data['video'] = Video::all();
-        return view('admin.video.index', compact('data'));
+        $data['contact'] = Contact::findOrFail(1);
+        return view('admin.contact.index', compact('data'));
     }
 
     /**
@@ -26,7 +25,8 @@ class VideoController extends Controller
      */
     public function create()
     {
-
+        abort(404);
+        // return view('admin.contact.create');
     }
 
     /**
@@ -38,18 +38,25 @@ class VideoController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'link_video' => 'required',
+            'address' => 'required|max:100',
+            'email' => 'required',
+            'telp' => 'required|max:15',
+            'facebook_link' => 'required',
+            'twitter_link' => 'required',
+            'instagram_link' => 'required',
         ]);
 
         try {
-            $embed_video = $this->embedVideo($request->link_video);
-
-            Video::create([
-                'link_video' => $request->link_video,
-                'embed_file' => $embed_video,
+            Contact::create([
+                'address' => $request->address,
+                'email' => $request->email,
+                'telp' => $request->telp,
+                'facebook_link' => $request->facebook_link,
+                'twitter_link' => $request->twitter_link,
+                'instagram_link' => $request->instagram_link,
             ]);
 
-            return redirect()->route('video.index')
+            return redirect()->route('contact.index')
                              ->with(['success' => 'Data berhasil ditambahkan']);
         } catch (\Exception $e) {
             return redirect()->back()
@@ -76,8 +83,8 @@ class VideoController extends Controller
      */
     public function edit($id)
     {
-        $data['video'] = Video::findOrFail($id);
-        return view('admin.video.edit', compact('data'));
+        $data['contact'] = Contact::findOrFail($id);
+        return view('admin.contact.edit', compact('data'));
     }
 
     /**
@@ -90,21 +97,28 @@ class VideoController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'link_video' => 'required',
+            'address' => 'required|max:100',
+            'email' => 'required',
+            'telp' => 'required|max:15',
+            'facebook_link' => 'required',
+            'twitter_link' => 'required',
+            'instagram_link' => 'required',
         ]);
 
         try {
-            $video = Video::findOrFail($id);
+            $contact = Contact::findOrfail($id);
 
-            $embed_video = $this->embedVideo($request->link_video);
-
-            $video->update([
-                'link_video' => $request->link_video,
-                'embed_file' => $embed_video,
+            $contact->update([
+                'address' => $request->address,
+                'email' => $request->email,
+                'telp' => $request->telp,
+                'facebook_link' => $request->facebook_link,
+                'twitter_link' => $request->twitter_link,
+                'instagram_link' => $request->instagram_link,
             ]);
 
-            return redirect()->route('video.index')
-                             ->with(['success' => 'Data berhasil diedit']);
+            return redirect()->route('contact.index')
+                             ->with(['success' => 'Data berhasil diubah']);
         } catch (\Exception $e) {
             return redirect()->back()
                 ->with(['error' => $e->getMessage()]);
@@ -119,27 +133,6 @@ class VideoController extends Controller
      */
     public function destroy($id)
     {
-        try {
-            Video::findOrFail($id)->delete();
-
-            return redirect()->route('video.index')
-                             ->with(['success' => 'Data berhasil dihapus']);
-        } catch (\Exception $e) {
-            return redirect()->back()
-                ->with(['error' => $e->getMessage()]);
-        }
+        //
     }
-
-    private function embedVideo($linkVideo) {
-        $embed = Embed::make($linkVideo)->parseUrl();
-
-        if (!$embed) {
-            return '';
-        }
-
-        $embed->setAttribute(['width' => '100%', 'height' => '315']);
-        return $embed->getHtml();
-    }
-
-
 }

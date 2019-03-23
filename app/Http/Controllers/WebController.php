@@ -71,6 +71,14 @@ class WebController extends Controller
         $data['photo'] = Photo::all();
         // Photo
 
+        // Photo
+        $data['video'] = Video::all();
+        // Photo
+
+        // Contact
+        $data['contact'] = Contact::find(1);
+        // Contact
+
         return view('index', compact('data'));
     }
 
