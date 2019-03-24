@@ -55,7 +55,7 @@
                             <div class="form-group">
                                 <label for="exampleInputFile">Upload Background foto</label>
                                 <input type="file" id="exampleInputFile" name="background_photo" value="{{ old('background_photo') }}">
-                                <p class="help-block">* Maksimal 2 MB</p>
+                                <p class="help-block">* Maksimal 2 MB | Format .jpg</p>
                             </div>
                             <div class="form-group">
                                 <label for="logo">Logo</label>

@@ -45,7 +45,7 @@
                             <div class="form-group">
                                 <label for="exampleInputFile">Upload Logo</label>
                                 <input type="file" id="exampleInputFile" name="photo" value="{{ old('photo') }}">
-                                <p class="help-block">* Maksimal 2 MB</p>
+                                <p class="help-block">* Maksimal 2 MB | Format .jpg</p>
                             </div>
                             <div class="form-group">
                                 <label for="logo">Photo</label>

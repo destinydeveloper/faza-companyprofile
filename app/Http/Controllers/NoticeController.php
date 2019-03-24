@@ -142,7 +142,7 @@ class NoticeController extends Controller
 
     private function saveFile($name, $photo)
     {
-        $images = str_slug($name) . time() . '.' . $photo->getClientOriginalExtension();
+        $images = str_slug($name) . '.' . $photo->getClientOriginalExtension();
         $path = public_path('uploads/notice');
 
         if (!File::isDirectory($path)) {
