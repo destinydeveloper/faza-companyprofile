@@ -58,7 +58,7 @@
             </li>
             <li class="{{Request::is('admin/product*') ? 'active' : '' }}">
                 <a href="{{ route('product.index') }}">
-                    <i class="fa fa-product-hunt"></i> <span> Produk</span>
+                    <i class="fa fa-list-ol"></i> <span> Devisi</span>
                 </a>
             </li>
             <li class="{{Request::is('admin/notice*') ? 'active' : '' }}">
@@ -90,6 +90,12 @@
             <i class="fa fa-address-card"></i> <span> Kontak kami</span>
         </a>
     </li>
+    <li class="{{Request::is('admin/contact*') ? 'active' : '' }}">
+        <a href="{{ route('contact.index') }}">
+            <i class="fa fa-history"></i> <span> History</span>
+        </a>
+    </li>
+
 </ul>
 
 

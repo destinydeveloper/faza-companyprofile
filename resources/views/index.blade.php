@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>{{ $data['home']->title }}</title>
+    <title>Kampoeng Malang</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -44,15 +44,16 @@
     <header id="header">
         <div class="container">
 
-            <div id="logo" class="pull-left">
-                {{-- <h1><a href="#intro" class="scrollto">Kampoeng Malang</a></h1> --}}
-                <!-- Uncomment below if you prefer to use an image logo -->
-                <a href="#intro"><img src="{{ url('/') }}{{ $data['home']->path }}{{ $data['home']->photo }}" alt="header logo" title=""></a>
-            </div>
+        <div id="logo" class="pull-left">
+            {{-- <h1><a href="#intro" class="scrollto">Kampoeng Malang</a></h1> --}}
+            <!-- Uncomment below if you prefer to use an image logo -->
+            {{-- <img src="{{ url('/') }}{{ $data['aboutUs']->path }}{{ $data['aboutUs']->photo }}" alt=""> --}}
+            <a href="#intro"><img src="{{ url('/') }}{{ $data['home']->path }}{{ $data['home']->photo }}" alt="header logo" title="Logo" ></a>
+        </div>
 
             <nav id="nav-menu-container">
                 <ul class="nav-menu">
-                    <li class="menu-active"><a href="#intro" title="{{ $data['menu1']->title }}">{{ $data['menu1']->title }}</a></li>
+                    <li class="menu-active"><a href="#intro" class="scrollto" title="{{ $data['menu1']->title }}">{{ $data['menu1']->title }}</a></li>
                     <li><a href="#about" title="{{ $data['menu2']->title }}">{{ $data['menu2']->title }}</a></li>
                     <li><a href="#pricing" title="{{ $data['menu3']->title }}">{{ $data['menu3']->title }}</a></li>
                     <li><a href="#features" title="{{ $data['menu4']->title }}">{{ $data['menu4']->title }}</a></li>
@@ -72,16 +73,56 @@
     <!--==========================
     Intro Section
   ============================-->
-    <section id="intro">
-        <div class="product-screens mb-5">
+    {{-- <section id="intro"> --}}
+        <div class="carousel-margin" id="intro">
+            <div id="carouselId" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <li data-target="#carouselId" data-slide-to="0" class="active"></li>
+                    <li data-target="#carouselId" data-slide-to="1"></li>
+                    <li data-target="#carouselId" data-slide-to="2"></li>
+                </ol>
+                <div class="carousel-inner" role="listbox">
+                    <div class="carousel-item active">
+                        <img src="{{ url('/') }}{{ $data['aboutUs']->path }}{{ $data['aboutUs']->photo }}" alt="First slide" height="515" width="100%">
+                        <div class="carousel-caption ">
+                            <h3>Title</h3>
+                            <p>Description</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="{{ url('/') }}{{ $data['product']->path }}{{ $data['product']->photo }}" alt="First slide" height="515" width="100%">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h3>Title</h3>
+                            <p>Description</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="{{ url('/') }}{{ $data['aboutUs']->path }}{{ $data['aboutUs']->photo }}" alt="First slide" height="515" width="100%">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h3>Title</h3>
+                            <p>Description</p>
+                        </div>
+                    </div>
+                </div>
+                <a class="carousel-control-prev" href="#carouselId" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselId" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>
+        {{-- <div class="product-screens mb-5">
             <div class="intro-text">
                 <h2>{{ $data['home']->title }}</h2>
                 <p>{{ $data['home']->description }}</p>
                 <a href="#about" class="btn-get-started scrollto">Get Started</a>
             </div>
-        </div>
+        </div> --}}
 
-    </section><!-- #intro -->
+    {{-- </section><!-- #intro --> --}}
 
     <main id="main">
 
@@ -237,7 +278,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-9 text-center text-lg-left">
-                        <h3 class="cta-title">{{ $data['menu5']->title }}</h3>
+                        <h3 class="cta-title">{{ $data['notice']->title }}</h3>
                         <p class="cta-text">
                             {{ $data['notice']->description }}
                         </p>
