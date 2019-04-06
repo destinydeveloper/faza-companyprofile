@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Home;
+use App\Models\History;
 use Illuminate\Support\Facades\Auth;
 use File;
 use Image;
@@ -17,7 +18,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $data['home'] = Home::find(1);
+        $data = Home::all();
         return view('admin.home.index', compact('data'));
     }
 
@@ -28,8 +29,8 @@ class HomeController extends Controller
      */
     public function create()
     {
-        abort(404);
-        // return view('admin.home.create');
+        // abort(404);
+        return view('admin.home.create');
     }
 
     /**
@@ -40,32 +41,30 @@ class HomeController extends Controller
      */
     public function store(Request $request)
     {
+        $userLogin = Auth::user();
+
         $request->validate([
-            'logo' => 'required|file|image|mimes:jpeg,png,gif,webp|max:2048',
-            'background_photo' => 'required|file|image|mimes:jpeg,png,gif,webp|max:2048',
-            'title' => 'required',
-            'description' => 'required',
+            'photo' => 'required|file|image|mimes:jpeg,png,gif,webp|max:2048',
+            'caption' => 'required',
         ]);
 
         try {
-            $logo = null;
-            $background_photo = null;
+            $photo = null;
 
-            if ($request->hasFile('logo')) {
-                $logo = $this->saveLogo('logo', $request->file('logo'));
-            }
-
-            if ($request->hasFile('background_photo')) {
-                $background_photo = $this->saveFile('background-photo', $request->file('background_photo'));
+            if ($request->hasFile('photo')) {
+                $photo = $this->savePhoto('photo', $request->file('photo'));
             }
 
 
             Home::create([
-                'title' => $request->title,
-                'description' => $request->description,
-                'path' => public_path('uploads/home'),
-                'photo' => $logo,
-                'background_photo' => $background_photo,
+                'photo' => $photo,
+                'caption' => $request->caption,
+                'path' => '/uploads/home/',
+            ]);
+
+            History::create([
+                'id_user' => $userLogin->id,
+                'user_history' => "menambahkan data pada <b>HOME</b>"
             ]);
 
             return redirect()->route('home.index')
@@ -97,34 +96,31 @@ class HomeController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $userLogin = Auth::user();
+
         $this->validate($request, [
-            'logo' => 'nullable|file|image|mimes:jpeg,png,gif,webp|max:2048',
-            'background_photo' => 'nullable|file|image|mimes:jpeg,png,gif,webp|max:2048',
-            'title' => 'required',
-            'description' => 'required | max:100',
+            'photo' => 'nullable|file|image|mimes:jpeg,png,gif,webp|max:2048',
+            'caption' => 'required | max:100',
         ]);
 
         try {
             $home = Home::findOrFail($id);
 
-            $logo = $home->photo;
-            $background_photo = $home->background_photo;
+            $foto = $home->photo;
 
-            if ($request->hasFile('logo')) {
-                !empty($logo) ? File::delete(public_path('uploads/home/' . $logo)) : null;
-                $logo = $this->saveLogo('logo', $request->file('logo'));
-            }
-
-            if ($request->hasFile('background_photo')) {
-                !empty($background_photo) ? File::delete(public_path('uploads/home/' . $background_photo)) : null;
-                $background_photo = $this->saveFile('background-photo', $request->file('background_photo'));
+            if ($request->hasFile('photo')) {
+                !empty($foto) ? File::delete(public_path('uploads/home/' . $foto)) : null;
+                $foto = $this->savePhoto('photo', $request->file('photo'));
             }
 
             $home->update([
-                'title' => $request->title,
-                'description' => $request->description,
-                'photo' => $logo,
-                'background_photo' => $background_photo,
+                'caption' => $request->caption,
+                'photo' => $foto,
+            ]);
+
+            History::create([
+                'id_user' => $userLogin->id,
+                'user_history' => "melakukan perubahan pada <b>HOME</b> dengan ID ". $id
             ]);
 
             return redirect(route('home.index'))
@@ -143,16 +139,24 @@ class HomeController extends Controller
      */
     public function destroy($id)
     {
-        $user = User::findOrFail($id);
-        if (!empty($user->photo)) {
-            File::delete(public_path('uploads/users/' . $user->photo));
-        }
-        $user->delete();
+        $userLogin = Auth::user();
 
-        return redirect()->back()->with(['success' => $user->name. 'Telah Dihapus!']);
+        $home = Home::findOrFail($id);
+        if (!empty($home->photo)) {
+            File::delete(public_path('uploads/home/' . $home->photo));
+        }
+
+        History::create([
+            'id_user' => $userLogin->id,
+            'user_history' => "menghapus data pada <b>HOME</b> dengan ID ". $id
+        ]);
+
+        $home->delete();
+
+        return redirect()->back()->with(['success' => 'Foto behasil dihapus']);
     }
 
-    private function saveLogo($name, $photo)
+    private function savePhoto($name, $photo)
     {
         $images = str_slug($name) . time() . '.' . $photo->getClientOriginalExtension();
         $path = public_path('uploads/home');
@@ -160,19 +164,7 @@ class HomeController extends Controller
         if (!File::isDirectory($path)) {
             File::makeDirectory($path, 0777, true, true);
         }
-        Image::make($photo)->resize(348, 112)->save($path . '/' . $images);
-        return $images;
-    }
-
-    private function saveFile($name, $photo)
-    {
-        $images = str_slug($name) . '.' . $photo->getClientOriginalExtension();
-        $path = public_path('uploads/home');
-
-        if (!File::isDirectory($path)) {
-            File::makeDirectory($path, 0777, true, true);
-        }
-        Image::make($photo)->save($path . '/' . $images);
+        Image::make($photo)->resize(1280, 487)->save($path . '/' . $images);
         return $images;
     }
 }

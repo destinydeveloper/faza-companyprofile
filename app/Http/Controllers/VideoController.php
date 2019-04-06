@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Cohensive\Embed\Facades\Embed;
 use App\Models\Video;
+use App\Models\History;
 
 class VideoController extends Controller
 {
@@ -37,6 +39,8 @@ class VideoController extends Controller
      */
     public function store(Request $request)
     {
+        $userLogin = Auth::user();
+
         $request->validate([
             'link_video' => 'required',
         ]);
@@ -47,6 +51,11 @@ class VideoController extends Controller
             Video::create([
                 'link_video' => $request->link_video,
                 'embed_file' => $embed_video,
+            ]);
+
+            History::create([
+                'id_user' => $userLogin->id,
+                'user_history' => "menambahkan <b>VIDEO</b>"
             ]);
 
             return redirect()->route('video.index')
@@ -89,6 +98,8 @@ class VideoController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $userLogin = Auth::user();
+
         $request->validate([
             'link_video' => 'required',
         ]);
@@ -101,6 +112,11 @@ class VideoController extends Controller
             $video->update([
                 'link_video' => $request->link_video,
                 'embed_file' => $embed_video,
+            ]);
+
+            History::create([
+                'id_user' => $userLogin->id,
+                'user_history' => "melakukan perubahan pada <b>VIDEO</b> dengan ID ". $id
             ]);
 
             return redirect()->route('video.index')
@@ -119,8 +135,15 @@ class VideoController extends Controller
      */
     public function destroy($id)
     {
+        $userLogin = Auth::user();
+
         try {
             Video::findOrFail($id)->delete();
+
+            History::create([
+                'id_user' => $userLogin->id,
+                'user_history' => "menghapus <b>VIDEO</b> dengan ID ". $id
+            ]);
 
             return redirect()->route('video.index')
                              ->with(['success' => 'Data berhasil dihapus']);

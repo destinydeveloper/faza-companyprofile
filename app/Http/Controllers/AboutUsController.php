@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\About_us;
+use App\Models\History;
+
 use Illuminate\Support\Facades\Auth;
 use File;
 use Image;
@@ -101,6 +103,8 @@ class AboutUsController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $userLogin = Auth::user();
+
         $request->validate([
             'photo' => 'nullable|file|image|mimes:jpeg,png,gif,webp|max:2048',
             'description' => 'required',
@@ -121,6 +125,11 @@ class AboutUsController extends Controller
                 'description' => $request->description,
                 'title' => $request->title,
                 'photo' => $photo,
+            ]);
+
+            History::create([
+                'id_user' => $userLogin->id,
+                'user_history' => "melakukan perubahan pada <b>TENTANG KAMI</b>"
             ]);
 
             return redirect()->route('aboutus.index')

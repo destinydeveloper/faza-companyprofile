@@ -36,7 +36,7 @@
                     <div class="box-body">
                         <div class="form-group">
                             <label for="username">Username</label>
-                            <input type="text" class="form-control" id="username" name="username" placeholder="Masukan username" value="{{ $data['users']->username }}" required disabled>
+                            <input type="text" class="form-control" id="username" name="username" placeholder="Masukan username" value="{{ $data['users']->username }}" required readonly>
                         </div>
                         <div class="form-group">
                             <label for="nama">Nama</label>

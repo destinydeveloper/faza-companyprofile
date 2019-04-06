@@ -10,6 +10,6 @@ class Product_content extends Model
     protected $fillable = ['id_product', 'title', 'link', 'description'];
 
     public function misi() {
-        return $this->belongsTo('App\Product', 'id_product', 'id');
+        return $this->belongsTo(Misi::class);
     }
 }

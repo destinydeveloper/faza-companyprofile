@@ -1,15 +1,15 @@
 @extends('admin.layouts.app')
 
-@section('page-title', 'Product')
+@section('page-title', 'Divisi')
 
 @section('admin-role', 'Administrasi')
 
-@section('content-title', 'Edit product')
+@section('content-title', 'Edit Divisi')
 
 @section('breadcrumb')
     <ol class="breadcrumb">
-        <li><a href="{{ route('product.index') }}"><i class="fa fa-product-hunt"></i> Product</a></li>
-        <li class="active">Edit Product</li>
+        <li><a href="{{ route('product.index') }}"><i class="fa fa-list-ol"></i> Divisi</a></li>
+        <li class="active">Edit Divisi</li>
     </ol>
 @endsection
 

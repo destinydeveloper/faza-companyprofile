@@ -23,9 +23,11 @@
                 </div>
                 <form role="form" action="{{ route('users.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
-                    @if ($errors->any())
+
+                    @if ($errors->any() || session('error'))
                     <div class="alert alert-danger">
                         <ul>
+                            {{ session('error') }}
                             @foreach ($errors->all() as $error)
                             <li>{{ $error }}</li>
                             @endforeach

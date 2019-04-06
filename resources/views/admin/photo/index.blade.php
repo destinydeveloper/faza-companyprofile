@@ -31,6 +31,7 @@
                         <div class="row">
                             @foreach ($data['photo'] as $data)
                                 <div class="col-md-4" style="text-align: center" >
+                                    <span style="float: left" class="label label-danger">{{ $data->id }}</span>
                                     <span style="float: right" class="label label-info">{{ date('d F Y', strtotime($data->updated_at)) }}</span>
                                     <br>
                                     <img src="{{ url('/') }}{{ $data->path }}{{ $data->photo }}" alt="" width="100%" height="300px">

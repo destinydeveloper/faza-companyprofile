@@ -53,7 +53,7 @@
     <div class="col-md-8 col-xs-12">
         <div class="box box-primary">
             <div class="box-header">
-                <h3 class="box-title">Isi konten produk</h3>
+                <h3 class="box-title">Isi konten video</h3>
                 {{-- <a href="{{ route('product.create_content') }}" style="float: right" class="btn btn-success btn-sm"><span class="fa fa-plus"></span> Tambah data</a> --}}
             </div>
             <div class="box-body no-padding ">
@@ -70,6 +70,7 @@
                             <td style="text-align: center; vertical-align: middle">{{ $i++ }}. </td>
                             <td style=" vertical-align: middle; text-align: center" >
                                 <span style="float: right" class="label label-info">{{ date('d F Y', strtotime($data->updated_at)) }}</span>
+                                <span style="float: left" class="label label-danger">{{ $data->id }}</span>
                                 <br>
                                 {!! $data->embed_file !!}
                             </td>

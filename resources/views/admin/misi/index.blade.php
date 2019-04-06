@@ -63,6 +63,7 @@
                 <table class="table table-striped">
                     <tr>
                         <th style="width: 10px; text-align: center">#</th>
+                        <th style="width: 50px; text-align: center">ID</th>
                         <th style="text-align: center">Visi</th>
                         <th style="text-align: center">Aksi</th>
                     </tr>
@@ -70,6 +71,7 @@
                     @foreach ($data['misi_content'] as $data)
                         <tr>
                             <td style="text-align: center; vertical-align: middle">{{ $i++ }}. </td>
+                            <td style="text-align: center; vertical-align: middle"><b>( {{ $data->id }} )</b> </td>
                             <td style=" vertical-align: middle">{{ $data->description }}</td>
                             <td style="text-align: center; vertical-align: middle">
                                 <form action="{{ route('misi.destroy_content', $data->id) }}" method="post">

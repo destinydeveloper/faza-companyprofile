@@ -36,7 +36,7 @@ class WebController extends Controller
         // Menu
 
         // Home
-        $data['home'] = Home::find(1);
+        $data['home'] = Home::all();
         // Home
 
         // About us

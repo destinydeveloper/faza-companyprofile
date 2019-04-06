@@ -99,6 +99,8 @@ class NoticeController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $userLogin = Auth::user();
+
         $request->validate([
             'photo' => 'nullable|file|image|mimes:jpeg,png,gif,webp|max:2048',
             'description' => 'required',
@@ -119,6 +121,11 @@ class NoticeController extends Controller
                 'description' => $request->description,
                 'title' => $request->title,
                 'photo' => $photo,
+            ]);
+
+            History::create([
+                'id_user' => $userLogin->id,
+                'user_history' => "melakukan perubahan pada <b>PENGUMUMAN</b>"
             ]);
 
             return redirect()->route('notice.index')

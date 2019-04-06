@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Menu;
 use Illuminate\Support\Facades\Auth;
+use App\Models\History;
 
 class MenuController extends Controller
 {
@@ -78,6 +79,8 @@ class MenuController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $userLogin = Auth::user();
+
         $menu = Menu::findOrFail($id);
 
         $request->validate([
@@ -85,12 +88,18 @@ class MenuController extends Controller
             'sub_title' => 'required',
         ]);
 
-         $menu->update([
+        try {
+
+        $menu->update([
             'title' => $request->title,
             'sub_title' => $request->sub_title,
         ]);
 
-        try {
+        History::create([
+            'id_user' => $userLogin->id,
+            'user_history' => "melakukan perubahan pada menu ". $request->title
+        ]);
+
             return redirect()->route('menu.index')
             ->with(['success' => 'Data berhasil diubah']);
         } catch (\Exception $e) {

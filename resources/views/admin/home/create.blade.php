@@ -4,7 +4,7 @@
 
 @section('admin-role', 'Administrasi')
 
-@section('content-title', 'Home')
+@section('content-title', 'Tambah foto')
 
 @section('breadcrumb')
     <ol class="breadcrumb">
@@ -18,6 +18,9 @@
     <div class="col-md-7 col-xs-12">
         <div class="box">
             <div class="box box-primary">
+                <div class="box-header">
+                    <h3 class="box-title">Home </h3>
+                </div>
                     <div class="box-body">
                         <form action="{{ route('home.store') }}" method="post" enctype="multipart/form-data">
                             @csrf
@@ -30,23 +33,21 @@
                                 </ul>
                             </div>
                             @endif
-                            <div class="form-group">
-                                <label for="judul">Judul</label>
-                                <input type="text" id="judul" name="title" class="title form-control" style="background: white; font-size: 15px" value="{{ old('title') }}" required>
+
+                            @if (session('error'))
+                            <div class="alert alert-danger alert-dismissible">
+                                {{session('error')}}
                             </div>
+                            @endif
+
                             <div class="form-group">
-                                <label for="deskripsi">Deskripsi</label>
-                                <textarea name="description" class="form-control" id="deskripsi" style="background: white; font-size: 15px" cols="30" rows="5">{{ old('description') }}</textarea>
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputFile">Upload Logo</label>
-                                <input type="file" id="exampleInputFile" name="logo" value="{{ old('logo') }}" required>
+                                <label for="exampleInputFile">Foto</label>
+                                <input type="file" id="exampleInputFile" name="photo" value="{{ old('photo') }}" required>
                                 <p class="help-block">* Maksimal 2 MB</p>
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputFile">Upload Background foto</label>
-                                <input type="file" id="exampleInputFile" name="background_photo" value="{{ old('background_photo') }}" required>
-                                <p class="help-block">* Maksimal 2 MB</p>
+                                <label for="deskripsi">Caption</label>
+                                <textarea name="caption" class="form-control" id="deskripsi" style="background: white; font-size: 15px" cols="30" rows="5">{{ old('description') }}</textarea>
                             </div>
                             <div class="box-footer text-center">
                                 <input type="submit" class="btn btn-primary btn-block" value="Simpan">

@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Contact;
+use App\Models\History;
+use File;
+use Image;
 
 class ContactController extends Controller
 {
@@ -44,9 +48,16 @@ class ContactController extends Controller
             'facebook_link' => 'required',
             'twitter_link' => 'required',
             'instagram_link' => 'required',
+            'logo' => 'required|file|image|mimes:jpeg,png,gif,webp|max:2048',
         ]);
 
         try {
+            $logo = null;
+
+            if ($request->hasFile('logo')) {
+                $logo = $this->saveLogo('logo', $request->file('logo'));
+            }
+
             Contact::create([
                 'address' => $request->address,
                 'email' => $request->email,
@@ -54,6 +65,8 @@ class ContactController extends Controller
                 'facebook_link' => $request->facebook_link,
                 'twitter_link' => $request->twitter_link,
                 'instagram_link' => $request->instagram_link,
+                'logo' => $logo,
+                'path' => '/uploads/contact/',
             ]);
 
             return redirect()->route('contact.index')
@@ -96,6 +109,8 @@ class ContactController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $userLogin = Auth::user();
+
         $request->validate([
             'address' => 'required|max:100',
             'email' => 'required',
@@ -103,10 +118,18 @@ class ContactController extends Controller
             'facebook_link' => 'required',
             'twitter_link' => 'required',
             'instagram_link' => 'required',
+            'logo' => 'file|image|mimes:jpeg,png,gif,webp|max:2048',
         ]);
 
         try {
             $contact = Contact::findOrfail($id);
+
+            $logo = $contact->logo;
+
+            if ($request->hasFile('logo')) {
+                !empty($logo) ? File::delete(public_path('uploads/contact/' . $logo)) : null;
+                $logo = $this->saveLogo('logo', $request->file('logo'));
+            }
 
             $contact->update([
                 'address' => $request->address,
@@ -115,6 +138,13 @@ class ContactController extends Controller
                 'facebook_link' => $request->facebook_link,
                 'twitter_link' => $request->twitter_link,
                 'instagram_link' => $request->instagram_link,
+                'logo' => $logo,
+                'path' => "/uploads/contact/"
+            ]);
+
+            History::create([
+                'id_user' => $userLogin->id,
+                'user_history' => "melakukan perubahan pada <b>KONTAK KAMI</b>"
             ]);
 
             return redirect()->route('contact.index')
@@ -134,5 +164,17 @@ class ContactController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    private function saveLogo($name, $photo)
+    {
+        $images = str_slug($name) . time() . '.' . $photo->getClientOriginalExtension();
+        $path = public_path('uploads/contact');
+
+        if (!File::isDirectory($path)) {
+            File::makeDirectory($path, 0777, true, true);
+        }
+        Image::make($photo)->resize(348, 112)->save($path . '/' . $images);
+        return $images;
     }
 }

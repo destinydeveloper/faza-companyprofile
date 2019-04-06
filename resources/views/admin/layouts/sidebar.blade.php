@@ -23,7 +23,7 @@
         </a>
     </li>
     <li class="treeview
-        {{Request::is('admin') || Request::is('admin/users*') || Request::is('admin/menu*') || Request::is('admin/photo*') || Request::is('admin/video*') || Request::is('admin/contact*')   ? '' : 'active' }} ">
+        {{Request::is('admin') || Request::is('admin/users*') || Request::is('admin/menu*') || Request::is('admin/photo*') || Request::is('admin/video*') || Request::is('admin/contact*') || Request::is('admin/history*')  ? '' : 'active' }} ">
         <a href="#">
             <i class="fa fa-list"></i> <span> Konten menu</span>
             <span class="pull-right-container">
@@ -58,7 +58,7 @@
             </li>
             <li class="{{Request::is('admin/product*') ? 'active' : '' }}">
                 <a href="{{ route('product.index') }}">
-                    <i class="fa fa-list-ol"></i> <span> Devisi</span>
+                    <i class="fa fa-list-ol"></i> <span> Divisi</span>
                 </a>
             </li>
             <li class="{{Request::is('admin/notice*') ? 'active' : '' }}">
@@ -90,8 +90,9 @@
             <i class="fa fa-address-card"></i> <span> Kontak kami</span>
         </a>
     </li>
-    <li class="{{Request::is('admin/contact*') ? 'active' : '' }}">
-        <a href="{{ route('contact.index') }}">
+    <li class="{{Request::is('admin/history*') ? 'active' : '' }}">
+        <a href="{{ route('history.index') }}">
+
             <i class="fa fa-history"></i> <span> History</span>
         </a>
     </li>

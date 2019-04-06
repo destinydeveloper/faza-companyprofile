@@ -1,14 +1,14 @@
 @extends('admin.layouts.app')
 
-@section('page-title', 'Produk')
+@section('page-title', 'Divisi')
 
 @section('admin-role', 'Administrasi')
 
-@section('content-title', 'Produk')
+@section('content-title', 'Divisi')
 
 @section('breadcrumb')
     <ol class="breadcrumb">
-        <li><a href="{{ route('product.index') }}"><i class="fa fa-product-hunt"></i> Produk</a></li>
+        <li><a href="{{ route('product.index') }}"><i class="fa fa-list-ol"></i> Divisi</a></li>
         <li class="active">Home</li>
     </ol>
 @endsection
@@ -29,7 +29,7 @@
     <div class="col-md-4 col-xs-12">
         <div class="box box-primary">
             <div class="box-header">
-                <h3 class="box-title">Produk </h3>
+                <h3 class="box-title">Divisi </h3>
                 <a href="{{ route('product.edit', $data['product']->id) }}" style="float: right" class="btn btn-warning btn-sm"><span class="fa fa-chain"></span> Ubah</a>
                 <br>
                 <span class="label label-info">{{ date('d F Y', strtotime($data['product']->updated_at)) }}</span>
@@ -51,13 +51,14 @@
     <div class="col-md-8 col-xs-12">
         <div class="box box-primary">
             <div class="box-header">
-                <h3 class="box-title">Isi konten produk</h3>
+                <h3 class="box-title">Isi konten divisi</h3>
                 <a href="{{ route('product.create_content') }}" style="float: right" class="btn btn-success btn-sm"><span class="fa fa-plus"></span> Tambah data</a>
             </div>
             <div class="box-body no-padding table-responsive">
                 <table class="table table-striped">
                     <tr>
                         <th style="width: 10px; text-align: center">#</th>
+                        <th style="width: 50px; text-align: center">ID</th>
                         <th style="text-align: center">Judul</th>
                         <th style="text-align: center">Link</th>
                         <th style="text-align: center">Deskripsi</th>
@@ -68,6 +69,7 @@
 
                         <tr>
                             <td style="text-align: center; vertical-align: middle">{{ $i++ }}. </td>
+                            <td style="text-align: center; vertical-align: middle"><b>( {{ $data->id }} )</b> </td>
                             <td style=" vertical-align: middle; text-align: center">{{ $data->title }}</td>
                             <td style=" vertical-align: middle; text-align: center"> <a href="{{ $data->link }}">{{ $data->link }}</a></td>
                             <td style=" vertical-align: middle">{{ $data->description }}</td>

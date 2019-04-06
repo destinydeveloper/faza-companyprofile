@@ -31,6 +31,10 @@
                     </div>
                     <div class="box-body">
                         <div class="form-group">
+                            <label>Logo</label>
+                            <img src="{{ url('/') }}{{ $data['contact']->path }}{{ $data['contact']->logo }}" class="img-responsive" id="logo" src="" width="50%" height="50%" alt="" src="">
+                        </div>
+                        <div class="form-group">
                             <label>Alamat</label>
                             <textarea name="address" class="form-control" id="deskripsi"  style="background: white; font-size: 15px" cols="30" rows="5" placeholder="Masukan alamat" readonly> {{ $data['contact']->address }} </textarea>
                         </div>

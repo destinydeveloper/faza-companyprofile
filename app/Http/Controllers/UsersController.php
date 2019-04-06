@@ -6,8 +6,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\User;
+use App\Models\History;
 use File;
 use Image;
+
 
 class UsersController extends Controller
 {
@@ -18,15 +20,15 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $user = Auth::user();
+        $userLogin = Auth::user();
 
-        if ($user->status == 0) {
+        if ($userLogin->status == 0) {
             $data['users'] = User::query()->where('status', '=', 0)->get();
         } else {
             $data['users'] = User::all();
         }
 
-        return view('admin.users.index', compact('data'));
+        return view('admin.users.index', compact('data', 'userLogin'));
     }
 
     /**
@@ -47,6 +49,8 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
+        $userLogin = Auth::user();
+
         $request->validate([
             'photo' => 'required|file|image|mimes:jpeg,png,gif,webp|max:2048',
             'password' => 'required | string | min:8 | confirmed',
@@ -57,13 +61,18 @@ class UsersController extends Controller
             if ($request->hasFile('photo')) {
                 $photo = $this->saveFile($request->name, $request->file('photo'));
             }
-            $users = User::create([
+            User::create([
                 'name' => $request->name,
                 'username' => $request->username,
                 'password' => bcrypt($request->password),
                 'email' => $request->email,
                 'photo' => $photo,
                 'status' => 0,
+            ]);
+
+            History::create([
+                'id_user' => $userLogin->id,
+                'user_history' => "menambahkan <b>PENGGUNA</b> ". $request->username
             ]);
 
             return redirect()->route('users.index')
@@ -95,6 +104,8 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $userLogin = Auth::user();
+
         $this->validate($request, [
             'photo' => 'nullable|file|image|mimes:jpeg,png,gif,webp|max:2048',
             // 'password' => 'required | string | min:8 | confirmed',
@@ -115,6 +126,11 @@ class UsersController extends Controller
                 'photo' => $photo
             ]);
 
+            History::create([
+                'id_user' => $userLogin->id,
+                'user_history' => "melakukan perubahan pada <b>PENGGUNA</b> ". $request->username
+            ]);
+
             return redirect(route('users.index'))
                 ->with(['success' => 'Data berhasil Diedit']);
         } catch (\Exception $e) {
@@ -131,10 +147,18 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
+        $userLogin = Auth::user();
+
         $user = User::findOrFail($id);
         if (!empty($user->photo)) {
             File::delete(public_path('uploads/users/' . $user->photo));
         }
+
+        History::create([
+            'id_user' => $userLogin->id,
+            'user_history' => "menghapus <b>PENGGUNA</b> ". $user->username
+        ]);
+
         $user->delete();
 
         return redirect()->back()->with(['success' => 'Data berhasil dihapus']);

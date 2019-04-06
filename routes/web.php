@@ -27,7 +27,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function () {
     Route::post('/users/change/save', 'UsersController@changePassword')->name('users.saveChange');
 
     Route::resource('/menu', 'MenuController', ['except' => ['show', 'destroy', 'store']]);
-    Route::resource('/home', 'HomeController', ['except' => ['show', 'destroy', 'store']]);
+    Route::resource('/home', 'HomeController', ['except' => ['show']]);
     Route::resource('/aboutus', 'AboutUsController', ['except' => ['show', 'destroy', 'store']]);
     Route::resource('/visi', 'VisiController', ['except' => [ 'store', 'show', 'destroy']]);
 
@@ -54,6 +54,8 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function () {
     Route::resource('/video', 'VideoController', ['except' => ['show']]);
 
     Route::resource('/contact', 'ContactController');
+
+    Route::resource('/history', 'HistoryController');
 
 
 });

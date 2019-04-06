@@ -47,8 +47,8 @@
         <div id="logo" class="pull-left">
             {{-- <h1><a href="#intro" class="scrollto">Kampoeng Malang</a></h1> --}}
             <!-- Uncomment below if you prefer to use an image logo -->
-            {{-- <img src="{{ url('/') }}{{ $data['aboutUs']->path }}{{ $data['aboutUs']->photo }}" alt=""> --}}
-            <a href="#intro"><img src="{{ url('/') }}{{ $data['home']->path }}{{ $data['home']->photo }}" alt="header logo" title="Logo" ></a>
+            <a href="#intro" class="scrollto"><img src="{{ url('/') }}{{ $data['contact']->path }}{{ $data['contact']->logo }}" alt=""></a>
+            {{-- <a href="#intro"><img src="{{ url('/') }}{{ $data['home']->path }}{{ $data['home']->photo }}" alt="header logo" title="Logo" ></a> --}}
         </div>
 
             <nav id="nav-menu-container">
@@ -77,31 +77,20 @@
         <div class="carousel-margin" id="intro">
             <div id="carouselId" class="carousel slide" data-ride="carousel">
                 <ol class="carousel-indicators">
-                    <li data-target="#carouselId" data-slide-to="0" class="active"></li>
-                    <li data-target="#carouselId" data-slide-to="1"></li>
-                    <li data-target="#carouselId" data-slide-to="2"></li>
+                    @php $i = 0 @endphp
+                    @foreach ($data['home'] as $slide)
+                        <li data-target="#carouselId" data-slide-to="$i++" class="{{ $slide->id == 1 ? 'active' : '' }}"></li>
+                    @endforeach
                 </ol>
                 <div class="carousel-inner" role="listbox">
-                    <div class="carousel-item active">
-                        <img src="{{ url('/') }}{{ $data['aboutUs']->path }}{{ $data['aboutUs']->photo }}" alt="First slide" height="515" width="100%">
-                        <div class="carousel-caption ">
-                            <h3>Title</h3>
-                            <p>Description</p>
+                    @foreach ($data['home'] as $foto)
+                    <div class="carousel-item {{ $foto->id == 1 ? 'active' : '' }}">
+                            <img src="{{ url('/') }}{{ $foto->path }}{{ $foto->photo }}" alt="First slide" >
+                            <div class="carousel-caption ">
+                                <p>{{ $foto->caption }}</p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="carousel-item">
-                        <img src="{{ url('/') }}{{ $data['product']->path }}{{ $data['product']->photo }}" alt="First slide" height="515" width="100%">
-                        <div class="carousel-caption d-none d-md-block">
-                            <h3>Title</h3>
-                            <p>Description</p>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <img src="{{ url('/') }}{{ $data['aboutUs']->path }}{{ $data['aboutUs']->photo }}" alt="First slide" height="515" width="100%">
-                        <div class="carousel-caption d-none d-md-block">
-                            <h3>Title</h3>
-                            <p>Description</p>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
                 <a class="carousel-control-prev" href="#carouselId" role="button" data-slide="prev">
@@ -112,7 +101,6 @@
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                     <span class="sr-only">Next</span>
                 </a>
-            </div>
         </div>
         {{-- <div class="product-screens mb-5">
             <div class="intro-text">
@@ -362,7 +350,7 @@
                     <div class="col-lg-4 col-md-4 text-center">
                         <div class="contact-about">
                             {{-- <h3>LOGO KAMPOENG MALANG</h3> --}}
-                            <img src="{{ url('/') }}{{ $data['home']->path }}{{ $data['home']->photo }}" width="100%" height="200" alt="header logo" title="logo">
+                            <img src="{{ url('/') }}{{ $data['contact']->path }}{{ $data['contact']->logo }}" width="100%" height="200" alt="header logo" title="logo">
 
                             <div class="social-links mt-2">
                                 <a href="{{ $data['contact']->twitter_link }}" class="twitter" target="_blank"><i class="fa fa-twitter"></i></a>

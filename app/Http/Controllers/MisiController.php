@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Misi;
 use App\Models\Misi_content;
+use App\Models\History;
 use Illuminate\Support\Facades\Auth;
 use File;
 use Image;
@@ -79,6 +80,8 @@ class MisiController extends Controller
 
     public function storeContent(Request $request)
     {
+        $userLogin = Auth::user();
+
         $misi = Misi::findOrFail(1);
 
         $request->validate([
@@ -89,6 +92,11 @@ class MisiController extends Controller
             Misi_content::create([
                 'id_misi' => $misi->id,
                 'description' => $request->description,
+            ]);
+
+            History::create([
+                'id_user' => $userLogin->id,
+                'user_history' => "menambahkan data pada <b>KONTEN MISI</b>"
             ]);
 
             return redirect()->route('misi.create_content')
@@ -139,6 +147,8 @@ class MisiController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $userLogin = Auth::user();
+
         $request->validate([
             'photo' => 'nullable|file|image|mimes:jpeg,png,gif,webp|max:2048',
             'title' => 'required | max:20',
@@ -159,6 +169,11 @@ class MisiController extends Controller
                 'photo' => $photo,
             ]);
 
+            History::create([
+                'id_user' => $userLogin->id,
+                'user_history' => "melakukan perubahan pada <b>KONTEN MISI</b>"
+            ]);
+
             return redirect()->route('misi.index')
                              ->with(['success' => 'Data berhasil dirubah']);
         } catch (\Exception $e) {
@@ -169,6 +184,8 @@ class MisiController extends Controller
 
     public function updateContent(Request $request, $id)
     {
+        $userLogin = Auth::user();
+
         $request->validate([
             'description' => 'required',
         ]);
@@ -176,8 +193,14 @@ class MisiController extends Controller
         try {
             $misi_content = Misi_content::findOrfail($id);
 
+
             $misi_content->update([
                 'description' => $request->description,
+                ]);
+
+            History::create([
+                'id_user' => $userLogin->id,
+                'user_history' => "melakukan perubahan pada <b>KONTEN MISI</b> dengan ID ". $id
             ]);
 
             return redirect()->route('misi.index')
@@ -200,8 +223,16 @@ class MisiController extends Controller
 
     public function destroyContent($id)
     {
+        $userLogin = Auth::user();
+
         try{
             Misi_content::findOrfail($id)->delete();
+
+            History::create([
+                'id_user' => $userLogin->id,
+                'user_history' => "menghapus data pada <b>KONTEN MISI</b> dengan ID ". $id
+            ]);
+
             return redirect()->route('misi.index')
                              ->with(['success' => 'Konten berhasil dihapus']);
         } catch(\Exception $e) {

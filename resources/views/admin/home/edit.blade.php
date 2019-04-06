@@ -36,30 +36,17 @@
                             </div>
                             @endif
                             <div class="form-group">
-                                <label for="judul">Judul</label>
-                                <input type="text" id="judul" name="title" class="title form-control" style="background: white; font-size: 15px" value="{{ $data['home']->title }}" autofocus="on" required>
+                                <label for="deskripsi">Caption</label>
+                                <textarea name="caption" class="form-control" id="deskripsi" style="background: white; font-size: 15px" cols="30" rows="5">{{ $data['home']->caption }}</textarea>
                             </div>
                             <div class="form-group">
-                                <label for="deskripsi">Deskripsi</label>
-                                <textarea name="description" class="form-control" id="deskripsi" style="background: white; font-size: 15px" cols="30" rows="5">{{ $data['home']->description }}</textarea>
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputFile">Upload Logo</label>
-                                <input type="file" id="exampleInputFile" name="logo" value="{{ old('logo') }}">
+                                <label for="exampleInputFile">Upload Foto</label>
+                                <input type="file" id="exampleInputFile" name="photo" value="{{ old('photo') }}">
                                 <p class="help-block">* Maksimal 2 MB</p>
                             </div>
                             <div class="form-group">
-                                <label for="logo">Logo</label>
+                                <label for="logo">Foto</label>
                                 <img class="img-responsive" id="logo" src="{{ url('/') }}{{$data['home']->path}}{{$data['home']->photo}}" width="50%" height="50%" alt="" srcset="">
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputFile">Upload Background foto</label>
-                                <input type="file" id="exampleInputFile" name="background_photo" value="{{ old('background_photo') }}">
-                                <p class="help-block">* Maksimal 2 MB | Format .jpg</p>
-                            </div>
-                            <div class="form-group">
-                                <label for="logo">Logo</label>
-                                <img class="img-responsive" id="logo" src="{{ url('/') }}{{$data['home']->path}}{{$data['home']->background_photo}}" width="100%" height="50%" alt="" srcset="">
                             </div>
                             <div class="box-footer text-center">
                                 <input type="submit" class="btn btn-primary btn-block" value="Simpan">

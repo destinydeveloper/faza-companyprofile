@@ -1,14 +1,14 @@
 @extends('admin.layouts.app')
 
-@section('page-title', 'Produk')
+@section('page-title', 'Divisi')
 
 @section('admin-role', 'Administrasi')
 
-@section('content-title', 'Edit konten produk')
+@section('content-title', 'Edit konten divisi')
 
 @section('breadcrumb')
     <ol class="breadcrumb">
-        <li><a href="{{ route('product.index') }}"><i class="fa fa-product-hunt"></i> Produk</a></li>
+        <li><a href="{{ route('product.index') }}"><i class="fa fa-list-ol"></i> Divisi</a></li>
         <li class="active">Edit konten</li>
     </ol>
 @endsection
@@ -67,6 +67,7 @@
                     <table class="table table-striped">
                         <tr>
                             <th style="width: 15px; text-align: center; vertical-align: middle">#</th>
+                            <th style="width: 50px; text-align: center; vertical-align: middle">ID</th>
                             <th style="text-align: center; vertical-align: middle">Judul</th>
                             <th style="text-align: center; vertical-align: middle">Link</th>
                             <th style="text-align: center; vertical-align: middle">Deskripsi</th>
@@ -76,6 +77,7 @@
                         @foreach ($data['product_content'] as $data)
                             <tr>
                                 <td style="text-align: center;vertical-align: middle">{{ $i++ }}.</td>
+                                <td style="text-align: center; vertical-align: middle"><b>( {{ $data->id }} )</b> </td>
                                 <td style="text-align: center;vertical-align: middle">{{ $data['title'] }}</td>
                                 <td style="text-align: center;vertical-align: middle"><a href="{{ $data->link }}" target="_blank">{{ $data->link }}</a></td>
                                 <td>{{ $data['description'] }}</td>

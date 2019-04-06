@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Photo;
+use App\Models\History;
 use File;
 use Image;
 
@@ -38,6 +40,8 @@ class PhotoController extends Controller
      */
     public function store(Request $request)
     {
+        $userLogin = Auth::user();
+
         $request->validate([
             'photo' => 'required|file|image|mimes:jpeg,png,gif,webp|max:2048',
         ]);
@@ -52,6 +56,11 @@ class PhotoController extends Controller
             Photo::create([
                 'path' => '/uploads/photo/',
                 'photo' => $photo,
+            ]);
+
+            History::create([
+                'id_user' => $userLogin->id,
+                'user_history' => "menambahkan <b>FOTO</b>"
             ]);
 
             return redirect()->route('photo.index')
@@ -94,6 +103,8 @@ class PhotoController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $userLogin = Auth::user();
+
         $request->validate([
             'photo' => 'nullable|file|image|mimes:jpeg,png,gif,webp|max:2048',
         ]);
@@ -112,6 +123,11 @@ class PhotoController extends Controller
                 'photo' => $dataPhoto,
             ]);
 
+            History::create([
+                'id_user' => $userLogin->id,
+                'user_history' => "melakukan perubahan pada <b>FOTO</b> dengan ID ". $id
+            ]);
+
             return redirect()->route('photo.index')
                              ->with(['success' => 'Data berhasil diubah']);
         } catch (\Exception $e) {
@@ -128,8 +144,16 @@ class PhotoController extends Controller
      */
     public function destroy($id)
     {
+        $userLogin = Auth::user();
+
         try{
             Photo::findOrfail($id)->delete();
+
+            History::create([
+                'id_user' => $userLogin->id,
+                'user_history' => "menghapus <b>FOTO</b> dengan ID ". $id
+            ]);
+
             return redirect()->route('photo.index')
                              ->with(['success' => 'Data berhasil dihapus']);
         } catch(\Exception $e) {

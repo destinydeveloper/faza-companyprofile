@@ -57,6 +57,7 @@
                     <table class="table table-striped">
                         <tr>
                             <th style="width: 15px; text-align: center; vertical-align: middle">#</th>
+                            <th style="width: 50px; text-align: center; vertical-align: middle">ID</th>
                             <th style="text-align: center; vertical-align: middle">Deskripsi</th>
                             <th style="text-align: center; vertical-align: middle">Update terakhir</th>
                         </tr>
@@ -64,6 +65,7 @@
                         @foreach ($data['misi_content'] as $data)
                             <tr >
                                 <td style="text-align: center;vertical-align: middle">{{ $i++ }}.</td>
+                                <td style="text-align: center; vertical-align: middle"><b>( {{ $data->id }} )</b> </td>
                                 <td>{{ $data['description'] }}</td>
                                 <td style="text-align: center;vertical-align: middle">
                                     <span class="label label-info">{{ date('d F Y', strtotime($data->updated_at)) }}</span>

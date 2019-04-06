@@ -17,6 +17,11 @@ class EditHomeColumn extends Migration
             $table->dropColumn(['title', 'description', 'background_photo']);
             $table->text('caption')->after('photo');
         });
+
+        Schema::table('contact', function (Blueprint $table) {
+            $table->text('logo')->after('telp');
+            $table->text('path')->after('logo');
+        });
     }
 
     /**

@@ -15,8 +15,13 @@ class CreateHistoriesTable extends Migration
     {
         Schema::create('history', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->text('user_information');
+            $table->unsignedBigInteger('id_user');
+
+            $table->text('user_history');
             $table->timestamps();
+
+            $table->foreign('id_user')->references('id')->on('users')
+                  ->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

@@ -22,7 +22,7 @@
                     <h3 class="box-title">Kontak kami </h3>
                 </div>
                     <div class="box-body">
-                        <form action="{{ route('contact.update', $data['contact']->id) }}" method="post">
+                        <form action="{{ route('contact.update', $data['contact']->id) }}" method="post" enctype="multipart/form-data">
                             @csrf
                             @method('put')
                             @if ($errors->any())
@@ -34,6 +34,16 @@
                                 </ul>
                             </div>
                             @endif
+                            <div class="form-group">
+                                <label for="exampleInputFile">Upload Logo</label>
+                                <input type="file" id="exampleInputFile" name="logo" value="{{ old('logo') }}">
+                                <p class="help-block">* Maksimal 2 MB</p>
+                            </div>
+                            <div class="form-group">
+                                <label for="logo">Logo</label>
+                                {{-- {{ url('/') }}{{$data['home']->path}}{{$data['home']->photo}} --}}
+                                <img class="img-responsive" id="logo" src="" width="50%" height="50%" alt="" srcset="">
+                            </div>
                             <div class="form-group">
                                 <label>Alamat</label>
                                 <textarea name="address" class="form-control" id="deskripsi"  style="background: white; font-size: 15px" cols="30" rows="5" placeholder="Masukan alamat" autofocus="on" required> {{ $data['contact']->address }} </textarea>

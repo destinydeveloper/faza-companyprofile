@@ -18,7 +18,7 @@ class DashboardController extends Controller
     public function index()
     {
         $jml_foto_video = count(Photo::all()) + count(Video::all());
-        $jml_user = count(User::all());
+        $jml_user = count(User::query()->where('status', '=', 0)->get());
         $jml_menu = count(Menu::all());
         return view('admin.index', compact(['jml_foto_video', 'jml_user', 'jml_menu']));
     }

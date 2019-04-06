@@ -90,7 +90,7 @@ jQuery(document).ready(function($) {
         }
 
         $('html, body').animate({
-          scrollTop: target.offset().top - top_space
+          scrollTop: target.offset().top - top_space - 10
         }, 1500, 'easeInOutExpo');
 
         if ($(this).parents('.nav-menu').length) {

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Product_content;
+use App\Models\History;
 use Illuminate\Support\Facades\Auth;
 
 use File;
@@ -76,6 +77,8 @@ class ProductController extends Controller
 
     public function storeContent(Request $request)
     {
+        $userLogin = Auth::user();
+
         $product = Product::findOrFail(1);
 
         $request->validate([
@@ -98,6 +101,11 @@ class ProductController extends Controller
                 'title' => $request->title,
                 'link' => $link,
                 'description' => $request->description,
+            ]);
+
+            History::create([
+                'id_user' => $userLogin->id,
+                'user_history' => "menambahkan data pada <b>KONTEN DIVISI</b>"
             ]);
 
             return redirect()->route('product.index')
@@ -147,6 +155,8 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $userLogin = Auth::user();
+
         $request->validate([
             'photo' => 'nullable|file|image|mimes:jpeg,png,gif,webp|max:2048',
         ]);
@@ -165,6 +175,11 @@ class ProductController extends Controller
                 'photo' => $photo,
             ]);
 
+            History::create([
+                'id_user' => $userLogin->id,
+                'user_history' => "melakukan perubahan foto pada <b>DIVISI</b>"
+            ]);
+
             return redirect()->route('product.index')
                              ->with(['success' => 'Data berhasil dirubah']);
         } catch (\Exception $e) {
@@ -175,6 +190,8 @@ class ProductController extends Controller
 
     public function updateContent(Request $request, $id)
     {
+        $userLogin = Auth::user();
+
         $request->validate([
             'title' => 'required|max:30',
             'description' => 'required',
@@ -197,6 +214,11 @@ class ProductController extends Controller
                 'description' => $request->description,
             ]);
 
+            History::create([
+                'id_user' => $userLogin->id,
+                'user_history' => "melakukan perubahan pada <b>KONTEN DIVISI</b> dengan ID ". $id
+            ]);
+
             return redirect()->route('product.index')
                              ->with(['success' => 'Konten berhasil dirubah']);
         } catch (\Exception $e) {
@@ -217,8 +239,16 @@ class ProductController extends Controller
 
     public function destroyContent($id)
     {
+        $userLogin = Auth::user();
+
         try{
             Product_content::findOrfail($id)->delete();
+
+            History::create([
+                'id_user' => $userLogin->id,
+                'user_history' => "menghapus data pada <b>KONTEN DIVISI</b> dengan ID ". $id
+            ]);
+
             return redirect()->route('product.index')
                              ->with(['success' => 'Konten berhasil dihapus']);
         } catch(\Exception $e) {
