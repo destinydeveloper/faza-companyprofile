@@ -97,7 +97,7 @@ class MenuController extends Controller
 
         History::create([
             'id_user' => $userLogin->id,
-            'user_history' => "melakukan perubahan pada menu ". $request->title
+            'user_history' => "melakukan perubahan pada <b>MENU</b> bagian ". $request->title
         ]);
 
             return redirect()->route('menu.index')

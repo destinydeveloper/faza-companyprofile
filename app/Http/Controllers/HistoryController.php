@@ -14,16 +14,23 @@ class HistoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(request $request)
     {
-        $users = User::query()->where('status', '=', 0)->get();
-        $history = DB::table('history')
-                    ->join('users', 'history.id_user', '=', 'users.id')
-                    ->select('users.name', 'history.user_history', 'history.updated_at')
-                    ->orderBy('history.created_at', 'desc')
-                    ->get();
+        $pagination = 8;
 
-        return view('admin.history.index', compact('history', 'users'));
+        // Query
+        $history = History::whereHas('user', function ($query) use ($request) { //menggunakan nama category
+            $query->where('name', 'like', "%{$request->user_name}%");
+        })->orderBy('updated_at', 'DESC')->paginate($pagination);
+
+        //Append adalah sebuah method yang berfungsi untuk memastikan bahwa query string yang boleh ditambahkan hanya yang diinisialisasi, biasannya untuk pencarian
+        $history->appends($request->only('user_name'));
+
+        $users = User::query()->where('status', '=', 0)->get();
+
+		$number = numberPagination($pagination);
+
+        return view('admin.history.index', compact('history', 'users', 'number'));
     }
 
     /**

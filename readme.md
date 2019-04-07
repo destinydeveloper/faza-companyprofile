@@ -17,3 +17,9 @@
 ```bash
     $ "cohensive/embed"
 ```
+****
+### Revisi
+1. CP.1.1
+    - Penambahan slider pada home page
+    - Penambahan History user
+----
